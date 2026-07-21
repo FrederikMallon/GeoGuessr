@@ -64,6 +64,30 @@ Zusätzlich gibt es im Tab "Einstellungen" jederzeit einen manuellen
   in dieser Runde — negative Werte sind erlaubt).
 - Mit "+ Runde hinzufügen" beliebig viele weitere Runden ergänzen.
 
+### Multiplikator-Mechanik (Duelle)
+
+GeoGuessr-Duelle erhöhen nach jedem gewonnenen Runden-Duell den eigenen
+Punkte-Multiplikator um ×0,5 ab der nächsten Runde (0 Siege = ×1, 1 Sieg = ×1,5,
+2 Siege = ×2, …) — unabhängig davon für den Gegner. Das Tool erkennt das
+automatisch, während du einträgst:
+
+- Positive relative Punkte in einer Runde → dein Multiplikator steigt ab der
+  nächsten Runde um 0,5.
+- Negative relative Punkte → der Multiplikator des Gegners steigt.
+- Genau 0 Punkte → nichts ändert sich.
+- Pro Runde gibt es eine Checkbox, um die Mechanik für genau diese Runde
+  auszuschalten (z.B. bei Spielmodi ohne diesen Multiplikator) — die Runde
+  zählt dann nicht in die Gewinnserie hinein. Über die Checkbox oberhalb der
+  Rundenliste lässt sich die Mechanik für die ganze Partie auf einmal an-
+  oder abschalten.
+
+Der jeweils geltende Multiplikator wird live während der Eingabe neben jeder
+Runde angezeigt und beim Speichern mit abgelegt. In der Auswertung gibt es
+zusätzlich einen Schalter **"Punkte um Multiplikator bereinigen"**, der die
+relativen Punkte durch deinen aktuellen Multiplikator teilt — damit lassen
+sich Kennzahlen, Diagramme und der Crosstab unabhängig vom aktuellen
+Punktestand fair vergleichen.
+
 ### Auswertung
 - Kennzahlen-Karten: Anzahl Partien/Runden, Ø Distanz, Ø relative Punkte,
   beste Runde nach Distanz und nach Punkten.

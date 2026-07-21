@@ -18,6 +18,7 @@ const LS_GH_CONFIG_KEY = "geoguessr_log_gh_config_v1";
 
 let state = { games: [] };
 let charts = {}; // Chart.js Instanzen, damit wir sie vor Re-Render zerstören können
+let normalizeActive = false; // "Punkte um Multiplikator bereinigen"-Toggle
 let sortState = { rounds: { key: "date", dir: "desc" }, crosstab: { key: "rounds", dir: "desc" } };
 
 /* ----------------------- Hilfsfunktionen ----------------------- */
@@ -93,6 +94,8 @@ function countryOptionsHtml(selected) {
 function addRoundRow(prefill) {
   const list = document.getElementById("rounds-list");
   const idx = list.children.length + 1;
+  const masterActive = document.getElementById("multiplier-master").checked;
+  const active = prefill ? prefill.multiplierActive !== false : masterActive;
   const row = document.createElement("div");
   row.className = "round-row";
   row.innerHTML = `
@@ -103,13 +106,22 @@ function addRoundRow(prefill) {
     </select>
     <input type="number" class="r-distance" placeholder="Distanz (km)" min="0" step="0.1" value="${prefill ? prefill.distanceKm : ""}">
     <input type="number" class="r-points" placeholder="Rel. Punkte" step="1" value="${prefill ? prefill.relativePoints : ""}">
+    <div class="round-multi">
+      <label title="Multiplikator-Mechanik für diese Runde berücksichtigen">
+        <input type="checkbox" class="r-multi-active" ${active ? "checked" : ""}>
+        <span>an</span>
+      </label>
+      <span class="r-multi-badge mono"></span>
+    </div>
     <button type="button" class="remove-round" title="Runde entfernen">×</button>
   `;
   row.querySelector(".remove-round").addEventListener("click", () => {
     row.remove();
     renumberRounds();
+    updateLiveMultipliers();
   });
   list.appendChild(row);
+  updateLiveMultipliers();
 }
 
 function renumberRounds() {
@@ -118,12 +130,65 @@ function renumberRounds() {
   });
 }
 
+/* Berechnet für jede Runde in der aktuellen Eingabeliste den Multiplikator,
+   der VOR dieser Runde gilt (also Ergebnis aller vorherigen Runden mit
+   aktivierter Mechanik in dieser Partie). Rundet nichts weg — 0 Siege = ×1,
+   1 Sieg = ×1,5, 2 Siege = ×2, linear. Ein Unentschieden (0 Punkte) ändert
+   nichts, ein deaktiviertes Kästchen wird komplett übersprungen (zählt
+   weder als Sieg noch als Niederlage und zeigt keinen Multiplikator an). */
+function computeMultipliers(roundsData) {
+  let myWins = 0, oppWins = 0;
+  return roundsData.map(r => {
+    if (!r.multiplierActive) {
+      return { ...r, myMultiplier: null, oppMultiplier: null };
+    }
+    const myMultiplier = 1 + 0.5 * myWins;
+    const oppMultiplier = 1 + 0.5 * oppWins;
+    if (r.relativePoints > 0) myWins++;
+    else if (r.relativePoints < 0) oppWins++;
+    return { ...r, myMultiplier, oppMultiplier };
+  });
+}
+
+function updateLiveMultipliers() {
+  const rows = [...document.querySelectorAll("#rounds-list .round-row")];
+  const raw = rows.map(row => ({
+    active: row.querySelector(".r-multi-active").checked,
+    points: parseFloat(row.querySelector(".r-points").value)
+  }));
+  let myWins = 0, oppWins = 0;
+  rows.forEach((row, i) => {
+    const badge = row.querySelector(".r-multi-badge");
+    const { active, points } = raw[i];
+    if (!active) {
+      badge.textContent = "deaktiviert";
+      badge.classList.add("inactive");
+      return;
+    }
+    badge.classList.remove("inactive");
+    badge.textContent = `Ich ×${(1 + 0.5 * myWins).toFixed(1)} · Gegner ×${(1 + 0.5 * oppWins).toFixed(1)}`;
+    if (!isNaN(points)) {
+      if (points > 0) myWins++;
+      else if (points < 0) oppWins++;
+    }
+  });
+}
+
+document.getElementById("rounds-list").addEventListener("input", updateLiveMultipliers);
+document.getElementById("rounds-list").addEventListener("change", updateLiveMultipliers);
+
+document.getElementById("multiplier-master").addEventListener("change", (e) => {
+  document.querySelectorAll("#rounds-list .r-multi-active").forEach(cb => { cb.checked = e.target.checked; });
+  updateLiveMultipliers();
+});
+
 document.getElementById("add-round-btn").addEventListener("click", () => addRoundRow());
 
 function resetEntryForm() {
   document.getElementById("rounds-list").innerHTML = "";
   document.getElementById("game-date").value = todayStr();
   document.getElementById("game-note").value = "";
+  document.getElementById("multiplier-master").checked = true;
   addRoundRow();
   addRoundRow();
   document.getElementById("entry-status").textContent = "";
@@ -142,18 +207,20 @@ document.getElementById("save-game-btn").addEventListener("click", () => {
     return;
   }
 
-  const rounds = [];
+  let rounds = [];
   for (const row of rows) {
     const country = row.querySelector(".r-country").value;
     const distance = parseFloat(row.querySelector(".r-distance").value);
     const points = parseFloat(row.querySelector(".r-points").value);
+    const multiplierActive = row.querySelector(".r-multi-active").checked;
     if (!country || isNaN(distance) || isNaN(points)) {
       statusEl.textContent = "Bitte für jede Runde Land, Distanz und relative Punkte ausfüllen.";
       statusEl.className = "status-msg error";
       return;
     }
-    rounds.push({ country, distanceKm: distance, relativePoints: points });
+    rounds.push({ country, distanceKm: distance, relativePoints: points, multiplierActive });
   }
+  rounds = computeMultipliers(rounds);
 
   state.games.push({ id: genId(), date, note, rounds });
   saveLocal();
@@ -210,14 +277,25 @@ function flattenRounds() {
   const rows = [];
   for (const g of state.games) {
     g.rounds.forEach((r, i) => {
+      // myMultiplier/oppMultiplier fehlen bei altem, vor diesem Feature
+      // gespeichertem Daten — dann ohne Multiplikator-Info behandeln.
+      const myMultiplier = typeof r.myMultiplier === "number" ? r.myMultiplier : null;
+      const oppMultiplier = typeof r.oppMultiplier === "number" ? r.oppMultiplier : null;
       rows.push({
         gameId: g.id, date: g.date, note: g.note || "",
         roundNumber: i + 1, country: r.country,
-        distanceKm: r.distanceKm, relativePoints: r.relativePoints
+        distanceKm: r.distanceKm, relativePoints: r.relativePoints,
+        myMultiplier, oppMultiplier,
+        // Bereinigte Punkte: eigenen Multiplikator rausrechnen (unbekannt -> ×1 angenommen)
+        normalizedPoints: r.relativePoints / (myMultiplier || 1)
       });
     });
   }
   return rows;
+}
+
+function pointsOf(row) {
+  return normalizeActive ? row.normalizedPoints : row.relativePoints;
 }
 
 function getFilters() {
@@ -255,16 +333,18 @@ function renderSummaryCards(rows) {
   }
   const gamesUsed = new Set(rows.map(r => r.gameId)).size;
   const avgDist = rows.reduce((s, r) => s + r.distanceKm, 0) / rows.length;
-  const avgPts = rows.reduce((s, r) => s + r.relativePoints, 0) / rows.length;
+  const avgPts = rows.reduce((s, r) => s + pointsOf(r), 0) / rows.length;
   const best = rows.reduce((a, b) => (b.distanceKm < a.distanceKm ? b : a));
-  const bestPts = rows.reduce((a, b) => (b.relativePoints > a.relativePoints ? b : a));
+  const bestPts = rows.reduce((a, b) => (pointsOf(b) > pointsOf(a) ? b : a));
+  const ptsLabel = normalizeActive ? "Ø Punkte (bereinigt)" : "Ø rel. Punkte";
+  const bestPtsLabel = normalizeActive ? "Beste Punkte (bereinigt)" : "Beste Punkte";
 
   const cards = [
     { label: "Partien", value: gamesUsed, sub: `${rows.length} Runden gesamt` },
     { label: "Ø Distanz", value: fmt(avgDist) + " km", sub: "über alle gefilterten Runden" },
-    { label: "Ø rel. Punkte", value: fmt(avgPts, 0), sub: avgPts >= 0 ? "im Schnitt vorn" : "im Schnitt hinten", neg: avgPts < 0 },
+    { label: ptsLabel, value: fmt(avgPts, normalizeActive ? 1 : 0), sub: avgPts >= 0 ? "im Schnitt vorn" : "im Schnitt hinten", neg: avgPts < 0 },
     { label: "Beste Distanz", value: fmt(best.distanceKm) + " km", sub: `${best.country} · ${best.date}` },
-    { label: "Beste Punkte", value: fmt(bestPts.relativePoints, 0), sub: `${bestPts.country} · ${bestPts.date}` }
+    { label: bestPtsLabel, value: fmt(pointsOf(bestPts), normalizeActive ? 1 : 0), sub: `${bestPts.country} · ${bestPts.date}` }
   ];
 
   wrap.innerHTML = cards.map(c => `
@@ -287,9 +367,9 @@ function buildCrosstab(rows) {
     country,
     rounds: list.length,
     avgDistance: list.reduce((s, r) => s + r.distanceKm, 0) / list.length,
-    avgPoints: list.reduce((s, r) => s + r.relativePoints, 0) / list.length,
+    avgPoints: list.reduce((s, r) => s + pointsOf(r), 0) / list.length,
     bestDistance: Math.min(...list.map(r => r.distanceKm)),
-    bestPoints: Math.max(...list.map(r => r.relativePoints))
+    bestPoints: Math.max(...list.map(r => pointsOf(r)))
   }));
 }
 
@@ -301,15 +381,17 @@ function renderCrosstab(rows) {
     const cmp = typeof va === "string" ? va.localeCompare(vb, "de") : va - vb;
     return dir === "asc" ? cmp : -cmp;
   });
+  const digits = normalizeActive ? 1 : 0;
+  document.getElementById("crosstab-points-th").textContent = normalizeActive ? "Ø Punkte (bereinigt)" : "Ø rel. Punkte";
   const tbody = document.querySelector("#crosstab-table tbody");
   tbody.innerHTML = data.map(d => `
     <tr>
       <td>${d.country}</td>
       <td class="mono">${d.rounds}</td>
       <td class="mono">${fmt(d.avgDistance)}</td>
-      <td class="mono ${d.avgPoints < 0 ? "negative" : "positive"}">${fmt(d.avgPoints, 0)}</td>
+      <td class="mono ${d.avgPoints < 0 ? "negative" : "positive"}">${fmt(d.avgPoints, digits)}</td>
       <td class="mono">${fmt(d.bestDistance)}</td>
-      <td class="mono positive">${fmt(d.bestPoints, 0)}</td>
+      <td class="mono positive">${fmt(d.bestPoints, digits)}</td>
     </tr>`).join("") || `<tr><td colspan="6">Keine Daten für die aktuelle Auswahl.</td></tr>`;
   updateSortHeaderClasses("crosstab-table", key, dir);
 }
@@ -333,7 +415,9 @@ function renderRoundsTable(rows) {
       <td>${r.country}</td>
       <td class="mono">${fmt(r.distanceKm)}</td>
       <td class="mono ${r.relativePoints < 0 ? "negative" : "positive"}">${fmt(r.relativePoints, 0)}</td>
-    </tr>`).join("") || `<tr><td colspan="6">Keine Daten für die aktuelle Auswahl.</td></tr>`;
+      <td class="mono">${r.myMultiplier !== null ? "×" + fmt(r.myMultiplier, 1) : "–"}</td>
+      <td class="mono">${r.oppMultiplier !== null ? "×" + fmt(r.oppMultiplier, 1) : "–"}</td>
+    </tr>`).join("") || `<tr><td colspan="8">Keine Daten für die aktuelle Auswahl.</td></tr>`;
   updateSortHeaderClasses("rounds-table", key, dir);
 }
 
@@ -375,7 +459,7 @@ function renderCharts(rows) {
   renderTrendChart(rows);
   renderScatterChart(rows);
   renderCountryBar("chart-country-distance", rows, "avgDistance", "Ø Distanz (km)", CHART_COLORS[3]);
-  renderCountryBar("chart-country-points", rows, "avgPoints", "Ø rel. Punkte", CHART_COLORS[0]);
+  renderCountryBar("chart-country-points", rows, "avgPoints", normalizeActive ? "Ø Punkte (bereinigt)" : "Ø rel. Punkte", CHART_COLORS[0]);
 }
 
 function renderTrendChart(rows) {
@@ -384,12 +468,13 @@ function renderTrendChart(rows) {
   for (const r of rows) {
     if (!byGame.has(r.gameId)) byGame.set(r.gameId, { date: r.date, dist: [], pts: [] });
     const g = byGame.get(r.gameId);
-    g.dist.push(r.distanceKm); g.pts.push(r.relativePoints);
+    g.dist.push(r.distanceKm); g.pts.push(pointsOf(r));
   }
   const games = [...byGame.values()].sort((a, b) => a.date.localeCompare(b.date));
   const labels = games.map(g => g.date);
   const avgDist = games.map(g => g.dist.reduce((s, v) => s + v, 0) / g.dist.length);
   const avgPts = games.map(g => g.pts.reduce((s, v) => s + v, 0) / g.pts.length);
+  const ptsLabel = normalizeActive ? "Ø Punkte (bereinigt)" : "Ø rel. Punkte";
 
   const ctx = document.getElementById("chart-trend");
   charts.trend = new Chart(ctx, {
@@ -398,7 +483,7 @@ function renderTrendChart(rows) {
       labels,
       datasets: [
         { label: "Ø Distanz (km)", data: avgDist, borderColor: CHART_COLORS[3], backgroundColor: "transparent", yAxisID: "y", tension: 0.25 },
-        { label: "Ø rel. Punkte", data: avgPts, borderColor: CHART_COLORS[0], backgroundColor: "transparent", yAxisID: "y1", tension: 0.25 }
+        { label: ptsLabel, data: avgPts, borderColor: CHART_COLORS[0], backgroundColor: "transparent", yAxisID: "y1", tension: 0.25 }
       ]
     },
     options: {
@@ -420,7 +505,7 @@ function renderScatterChart(rows) {
     data: {
       datasets: [{
         label: "Runde",
-        data: rows.map(r => ({ x: r.distanceKm, y: r.relativePoints, country: r.country })),
+        data: rows.map(r => ({ x: r.distanceKm, y: pointsOf(r), country: r.country })),
         backgroundColor: CHART_COLORS[1]
       }]
     },
@@ -429,14 +514,14 @@ function renderScatterChart(rows) {
       plugins: {
         tooltip: {
           callbacks: {
-            label: (ctx) => `${ctx.raw.country}: ${fmt(ctx.raw.x)} km, ${fmt(ctx.raw.y, 0)} Pkt.`
+            label: (ctx) => `${ctx.raw.country}: ${fmt(ctx.raw.x)} km, ${fmt(ctx.raw.y, normalizeActive ? 1 : 0)} Pkt.`
           }
         },
         legend: { display: false }
       },
       scales: {
         x: { title: { display: true, text: "Distanz (km)" } },
-        y: { title: { display: true, text: "Relative Punkte" } }
+        y: { title: { display: true, text: normalizeActive ? "Punkte (bereinigt)" : "Relative Punkte" } }
       }
     }
   });
@@ -480,6 +565,11 @@ document.getElementById("filter-reset").addEventListener("click", () => {
   document.getElementById("filter-country").value = "";
   document.getElementById("filter-from").value = "";
   document.getElementById("filter-to").value = "";
+  renderAuswertung();
+});
+
+document.getElementById("normalize-toggle").addEventListener("change", (e) => {
+  normalizeActive = e.target.checked;
   renderAuswertung();
 });
 

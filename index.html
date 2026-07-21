@@ -51,6 +51,14 @@
           </label>
         </div>
 
+        <label class="checkbox-field master-toggle">
+          <input type="checkbox" id="multiplier-master" checked>
+          <span>Multiplikator-Mechanik aktiv (Sieg = +0,5× ab der nächsten Runde, für mich oder Gegner)</span>
+        </label>
+
+        <div class="rounds-head-labels">
+          <span></span><span>Land</span><span>Distanz</span><span>Rel. Punkte</span><span>Multi</span><span></span>
+        </div>
         <div id="rounds-list" class="rounds-list"></div>
 
         <button id="add-round-btn" class="btn btn-ghost" type="button">+ Runde hinzufügen</button>
@@ -92,6 +100,10 @@
         <input type="date" id="filter-to">
       </label>
       <button id="filter-reset" class="btn btn-ghost small" type="button">Filter zurücksetzen</button>
+      <label class="checkbox-field compact-checkbox">
+        <input type="checkbox" id="normalize-toggle">
+        <span>Punkte um Multiplikator bereinigen (÷ eigener Multiplikator)</span>
+      </label>
     </div>
 
     <div class="chart-grid">
@@ -125,7 +137,7 @@
               <th data-sort="country">Land</th>
               <th data-sort="rounds">Runden</th>
               <th data-sort="avgDistance">Ø Distanz (km)</th>
-              <th data-sort="avgPoints">Ø rel. Punkte</th>
+              <th data-sort="avgPoints" id="crosstab-points-th">Ø rel. Punkte</th>
               <th data-sort="bestDistance">Beste Distanz</th>
               <th data-sort="bestPoints">Beste Punkte</th>
             </tr>
@@ -150,6 +162,8 @@
               <th data-sort="country">Land</th>
               <th data-sort="distanceKm">Distanz (km)</th>
               <th data-sort="relativePoints">Rel. Punkte</th>
+              <th data-sort="myMultiplier">Multi ich</th>
+              <th data-sort="oppMultiplier">Multi Gegner</th>
             </tr>
           </thead>
           <tbody></tbody>
