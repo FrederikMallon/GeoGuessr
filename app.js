@@ -189,6 +189,7 @@ function resetEntryForm() {
   document.getElementById("game-date").value = todayStr();
   document.getElementById("game-note").value = "";
   document.getElementById("multiplier-master").checked = true;
+  // Modus bewusst NICHT zurücksetzen — meist spielt man mehrere Partien im selben Modus hintereinander.
   addRoundRow();
   addRoundRow();
   document.getElementById("entry-status").textContent = "";
@@ -198,6 +199,7 @@ function resetEntryForm() {
 document.getElementById("save-game-btn").addEventListener("click", () => {
   const statusEl = document.getElementById("entry-status");
   const date = document.getElementById("game-date").value || todayStr();
+  const mode = document.getElementById("game-mode").value;
   const note = document.getElementById("game-note").value.trim();
   const rows = [...document.querySelectorAll("#rounds-list .round-row")];
 
@@ -222,7 +224,7 @@ document.getElementById("save-game-btn").addEventListener("click", () => {
   }
   rounds = computeMultipliers(rounds);
 
-  state.games.push({ id: genId(), date, note, rounds });
+  state.games.push({ id: genId(), date, mode, note, rounds });
   saveLocal();
   statusEl.textContent = `Partie mit ${rounds.length} Runden gespeichert.`;
   statusEl.className = "status-msg";
@@ -246,7 +248,7 @@ function renderRecentGames() {
     return `
       <div class="recent-game">
         <div class="recent-game-head">
-          <span>${g.date}${g.note ? " · " + escapeHtml(g.note) : ""}</span>
+          <span>${g.date} · ${g.mode || "Modus unbekannt"}${g.note ? " · " + escapeHtml(g.note) : ""}</span>
           <span>${g.rounds.length} Runden</span>
         </div>
         <div class="recent-game-rounds">${countries}</div>
@@ -282,7 +284,7 @@ function flattenRounds() {
       const myMultiplier = typeof r.myMultiplier === "number" ? r.myMultiplier : null;
       const oppMultiplier = typeof r.oppMultiplier === "number" ? r.oppMultiplier : null;
       rows.push({
-        gameId: g.id, date: g.date, note: g.note || "",
+        gameId: g.id, date: g.date, mode: g.mode || "unbekannt", note: g.note || "",
         roundNumber: i + 1, country: r.country,
         distanceKm: r.distanceKm, relativePoints: r.relativePoints,
         myMultiplier, oppMultiplier,
@@ -301,6 +303,7 @@ function pointsOf(row) {
 function getFilters() {
   return {
     country: document.getElementById("filter-country").value,
+    mode: document.getElementById("filter-mode").value,
     from: document.getElementById("filter-from").value,
     to: document.getElementById("filter-to").value
   };
@@ -310,6 +313,7 @@ function applyFilters(rows) {
   const f = getFilters();
   return rows.filter(r =>
     (!f.country || r.country === f.country) &&
+    (!f.mode || r.mode === f.mode) &&
     (!f.from || r.date >= f.from) &&
     (!f.to || r.date <= f.to)
   );
@@ -410,6 +414,7 @@ function renderRoundsTable(rows) {
   tbody.innerHTML = data.map(r => `
     <tr>
       <td class="mono">${r.date}</td>
+      <td>${r.mode}</td>
       <td>${escapeHtml(r.note)}</td>
       <td class="mono">${r.roundNumber}</td>
       <td>${r.country}</td>
@@ -417,7 +422,7 @@ function renderRoundsTable(rows) {
       <td class="mono ${r.relativePoints < 0 ? "negative" : "positive"}">${fmt(r.relativePoints, 0)}</td>
       <td class="mono">${r.myMultiplier !== null ? "×" + fmt(r.myMultiplier, 1) : "–"}</td>
       <td class="mono">${r.oppMultiplier !== null ? "×" + fmt(r.oppMultiplier, 1) : "–"}</td>
-    </tr>`).join("") || `<tr><td colspan="8">Keine Daten für die aktuelle Auswahl.</td></tr>`;
+    </tr>`).join("") || `<tr><td colspan="9">Keine Daten für die aktuelle Auswahl.</td></tr>`;
   updateSortHeaderClasses("rounds-table", key, dir);
 }
 
@@ -558,11 +563,12 @@ function renderAuswertung() {
   renderCharts(rows);
 }
 
-["filter-country", "filter-from", "filter-to"].forEach(id => {
+["filter-country", "filter-mode", "filter-from", "filter-to"].forEach(id => {
   document.getElementById(id).addEventListener("change", renderAuswertung);
 });
 document.getElementById("filter-reset").addEventListener("click", () => {
   document.getElementById("filter-country").value = "";
+  document.getElementById("filter-mode").value = "";
   document.getElementById("filter-from").value = "";
   document.getElementById("filter-to").value = "";
   renderAuswertung();

@@ -45,6 +45,14 @@
             <span>Datum der Partie</span>
             <input type="date" id="game-date">
           </label>
+          <label class="field compact">
+            <span>Modus</span>
+            <select id="game-mode">
+              <option value="Move">Move</option>
+              <option value="No Move">No Move</option>
+              <option value="NMPZ">NMPZ</option>
+            </select>
+          </label>
           <label class="field">
             <span>Notiz <em>(optional)</em></span>
             <input type="text" id="game-note" placeholder="z.B. Duell vs. Anna, Ranked #42">
@@ -90,6 +98,15 @@
       <label class="field compact">
         <span>Land</span>
         <select id="filter-country"><option value="">Alle Länder</option></select>
+      </label>
+      <label class="field compact">
+        <span>Modus</span>
+        <select id="filter-mode">
+          <option value="">Alle Modi</option>
+          <option value="Move">Move</option>
+          <option value="No Move">No Move</option>
+          <option value="NMPZ">NMPZ</option>
+        </select>
       </label>
       <label class="field compact">
         <span>Von</span>
@@ -157,6 +174,7 @@
           <thead>
             <tr>
               <th data-sort="date">Datum</th>
+              <th data-sort="mode">Modus</th>
               <th data-sort="note">Notiz</th>
               <th data-sort="roundNumber">Runde</th>
               <th data-sort="country">Land</th>

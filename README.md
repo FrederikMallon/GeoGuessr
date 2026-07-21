@@ -59,6 +59,8 @@ Zusätzlich gibt es im Tab "Einstellungen" jederzeit einen manuellen
 ### Eingabe
 - Eine **Partie** besteht aus 2 oder mehr **Runden**.
 - Datum ist automatisch auf heute gesetzt, aber änderbar (gilt für die ganze Partie).
+- **Modus** (Move / No Move / NMPZ) wird pro Partie einmal gewählt und bleibt zwischen
+  Eingaben bestehen, da man meist mehrere Partien im selben Modus hintereinander spielt.
 - Pro Runde: Land (Dropdown), Distanz deines Tipps zur echten Position in km,
   und die relativen Punkte (dein Punktevorsprung/-rückstand gegenüber dem Gegner
   in dieser Runde — negative Werte sind erlaubt).
@@ -91,7 +93,7 @@ Punktestand fair vergleichen.
 ### Auswertung
 - Kennzahlen-Karten: Anzahl Partien/Runden, Ø Distanz, Ø relative Punkte,
   beste Runde nach Distanz und nach Punkten.
-- Filter nach Land und Zeitraum (wirkt auf alle Grafiken, Tabellen und Kennzahlen).
+- Filter nach Land, Modus und Zeitraum (wirkt auf alle Grafiken, Tabellen und Kennzahlen).
 - Diagramme: Verlauf von Ø Distanz/Punkten pro Partie, Distanz-vs-Punkte-Streudiagramm,
   sowie Balkendiagramme Ø Distanz bzw. Ø Punkte je Land.
 - Crosstab-Tabelle je Land (Rundenanzahl, Ø Distanz, Ø Punkte, beste Werte) — Spalten
