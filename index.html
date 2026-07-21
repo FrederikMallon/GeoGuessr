@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Logbuch — GeoGuessr Statistiken</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topo-header">
+  <div class="topo-lines" aria-hidden="true"></div>
+  <div class="header-inner">
+    <div class="brand">
+      <span class="brand-mark">⟡</span>
+      <div>
+        <h1>Logbuch</h1>
+        <p class="brand-sub">Koordinaten, Distanzen &amp; Punkte — händisch geführt</p>
+      </div>
+    </div>
+    <nav class="tabs" role="tablist">
+      <button class="tab-btn active" data-tab="eingabe" role="tab" aria-selected="true">Eingabe</button>
+      <button class="tab-btn" data-tab="auswertung" role="tab" aria-selected="false">Auswertung</button>
+      <button class="tab-btn" data-tab="einstellungen" role="tab" aria-selected="false">Einstellungen</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- ========================= EINGABE ========================= -->
+  <section id="tab-eingabe" class="tab-panel active">
+    <div class="panel-grid">
+
+      <div class="card entry-card">
+        <div class="card-head">
+          <h2>Neue Partie</h2>
+          <span class="hint">2–∞ Runden pro Partie</span>
+        </div>
+
+        <div class="field-row">
+          <label class="field">
+            <span>Datum der Partie</span>
+            <input type="date" id="game-date">
+          </label>
+          <label class="field">
+            <span>Notiz <em>(optional)</em></span>
+            <input type="text" id="game-note" placeholder="z.B. Duell vs. Anna, Ranked #42">
+          </label>
+        </div>
+
+        <div id="rounds-list" class="rounds-list"></div>
+
+        <button id="add-round-btn" class="btn btn-ghost" type="button">+ Runde hinzufügen</button>
+
+        <div class="entry-actions">
+          <span id="entry-status" class="status-msg"></span>
+          <button id="save-game-btn" class="btn btn-primary" type="button">Partie speichern</button>
+        </div>
+      </div>
+
+      <div class="card recent-card">
+        <div class="card-head">
+          <h2>Zuletzt gespeichert</h2>
+        </div>
+        <div id="recent-games" class="recent-games">
+          <p class="empty-note">Noch keine Partien erfasst.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================= AUSWERTUNG ========================= -->
+  <section id="tab-auswertung" class="tab-panel">
+
+    <div class="stats-grid" id="summary-cards"></div>
+
+    <div class="filter-bar card">
+      <label class="field compact">
+        <span>Land</span>
+        <select id="filter-country"><option value="">Alle Länder</option></select>
+      </label>
+      <label class="field compact">
+        <span>Von</span>
+        <input type="date" id="filter-from">
+      </label>
+      <label class="field compact">
+        <span>Bis</span>
+        <input type="date" id="filter-to">
+      </label>
+      <button id="filter-reset" class="btn btn-ghost small" type="button">Filter zurücksetzen</button>
+    </div>
+
+    <div class="chart-grid">
+      <div class="card chart-card">
+        <h3>Verlauf: Ø Punkte &amp; Ø Distanz pro Partie</h3>
+        <canvas id="chart-trend"></canvas>
+      </div>
+      <div class="card chart-card">
+        <h3>Distanz vs. relative Punkte (pro Runde)</h3>
+        <canvas id="chart-scatter"></canvas>
+      </div>
+      <div class="card chart-card">
+        <h3>Ø Distanz nach Land</h3>
+        <canvas id="chart-country-distance"></canvas>
+      </div>
+      <div class="card chart-card">
+        <h3>Ø relative Punkte nach Land</h3>
+        <canvas id="chart-country-points"></canvas>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <h2>Crosstab — Land im Detail</h2>
+        <span class="hint">Spalten anklicken zum Sortieren</span>
+      </div>
+      <div class="table-wrap">
+        <table id="crosstab-table" class="data-table">
+          <thead>
+            <tr>
+              <th data-sort="country">Land</th>
+              <th data-sort="rounds">Runden</th>
+              <th data-sort="avgDistance">Ø Distanz (km)</th>
+              <th data-sort="avgPoints">Ø rel. Punkte</th>
+              <th data-sort="bestDistance">Beste Distanz</th>
+              <th data-sort="bestPoints">Beste Punkte</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <h2>Alle Runden</h2>
+        <span class="hint">Spalten anklicken zum Sortieren</span>
+      </div>
+      <div class="table-wrap">
+        <table id="rounds-table" class="data-table">
+          <thead>
+            <tr>
+              <th data-sort="date">Datum</th>
+              <th data-sort="note">Notiz</th>
+              <th data-sort="roundNumber">Runde</th>
+              <th data-sort="country">Land</th>
+              <th data-sort="distanceKm">Distanz (km)</th>
+              <th data-sort="relativePoints">Rel. Punkte</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ========================= EINSTELLUNGEN ========================= -->
+  <section id="tab-einstellungen" class="tab-panel">
+    <div class="card">
+      <div class="card-head">
+        <h2>Daten &amp; Sicherung</h2>
+      </div>
+      <p class="settings-text">
+        Alle Eingaben werden zuerst lokal in diesem Browser gespeichert (localStorage).
+        Damit funktioniert das Tool sofort, auch ohne weitere Einrichtung — die Daten
+        bleiben aber an dieses Gerät gebunden, bis du sie sicherst oder synchronisierst.
+      </p>
+      <div class="settings-actions">
+        <button id="export-json-btn" class="btn btn-ghost" type="button">JSON exportieren</button>
+        <label class="btn btn-ghost file-btn">
+          JSON importieren
+          <input type="file" id="import-json-input" accept="application/json" hidden>
+        </label>
+        <button id="clear-data-btn" class="btn btn-danger" type="button">Alle Daten löschen</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <h2>GitHub-Synchronisierung <span class="badge">optional</span></h2>
+      </div>
+      <p class="settings-text">
+        Damit <code>data/results.json</code> im Repository selbst zum aktuellen Datenstand wird
+        (z.B. um von mehreren Geräten aus einzutragen), kann das Tool die Datei direkt über die
+        GitHub-API schreiben. Dafür wird ein <strong>fine-grained Personal Access Token</strong>
+        mit Schreibrecht nur für dieses eine Repository benötigt. Der Token wird ausschließlich
+        lokal in deinem Browser gespeichert und nur an <code>api.github.com</code> gesendet.
+      </p>
+      <div class="field-row">
+        <label class="field">
+          <span>GitHub-Benutzer/Organisation</span>
+          <input type="text" id="gh-owner" placeholder="z.B. maxmustermann">
+        </label>
+        <label class="field">
+          <span>Repository-Name</span>
+          <input type="text" id="gh-repo" placeholder="z.B. geoguessr-log">
+        </label>
+      </div>
+      <div class="field-row">
+        <label class="field">
+          <span>Branch</span>
+          <input type="text" id="gh-branch" placeholder="main" value="main">
+        </label>
+        <label class="field">
+          <span>Pfad zur JSON-Datei</span>
+          <input type="text" id="gh-path" placeholder="data/results.json" value="data/results.json">
+        </label>
+      </div>
+      <label class="field">
+        <span>Personal Access Token</span>
+        <input type="password" id="gh-token" placeholder="github_pat_…">
+      </label>
+      <div class="settings-actions">
+        <button id="gh-save-config-btn" class="btn btn-ghost" type="button">Konfiguration speichern</button>
+        <button id="gh-pull-btn" class="btn btn-ghost" type="button">Von GitHub laden</button>
+        <button id="gh-push-btn" class="btn btn-primary" type="button">Nach GitHub speichern</button>
+      </div>
+      <p id="gh-status" class="status-msg"></p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>Lokales Logbuch · Daten bleiben in deinem Browser bzw. deinem eigenen Repository.</p>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+<script src="countries.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

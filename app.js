@@ -1,0 +1,629 @@
+/* ===========================================================
+   GeoGuessr Logbuch — App-Logik
+   Datenmodell:
+   {
+     games: [
+       { id, date: "YYYY-MM-DD", note,
+         rounds: [ { country, distanceKm, relativePoints } ] }
+     ]
+   }
+   Persistenz: localStorage ist die "aktive" Kopie (funktioniert
+   sofort, ohne Einrichtung). Optional kann per GitHub-API die
+   Datei data/results.json im eigenen Repo als geteilter Stand
+   gepflegt werden (siehe Tab "Einstellungen").
+   =========================================================== */
+
+const LS_DATA_KEY = "geoguessr_log_data_v1";
+const LS_GH_CONFIG_KEY = "geoguessr_log_gh_config_v1";
+
+let state = { games: [] };
+let charts = {}; // Chart.js Instanzen, damit wir sie vor Re-Render zerstören können
+let sortState = { rounds: { key: "date", dir: "desc" }, crosstab: { key: "rounds", dir: "desc" } };
+
+/* ----------------------- Hilfsfunktionen ----------------------- */
+
+function todayStr() {
+  const d = new Date();
+  const tzOffset = d.getTimezoneOffset() * 60000;
+  return new Date(d - tzOffset).toISOString().slice(0, 10);
+}
+
+function genId() {
+  return Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 7);
+}
+
+function fmt(num, digits = 1) {
+  if (num === null || num === undefined || isNaN(num)) return "–";
+  return num.toLocaleString("de-DE", { minimumFractionDigits: digits, maximumFractionDigits: digits });
+}
+
+function utf8ToBase64(str) {
+  return btoa(unescape(encodeURIComponent(str)));
+}
+function base64ToUtf8(str) {
+  return decodeURIComponent(escape(atob(str)));
+}
+
+/* ----------------------- Laden / Speichern ----------------------- */
+
+async function loadInitialData() {
+  const local = localStorage.getItem(LS_DATA_KEY);
+  if (local) {
+    try { state = JSON.parse(local); return; } catch (e) { /* fällt durch */ }
+  }
+  // Kein lokaler Stand vorhanden: versuche, die JSON aus dem Repo zu laden
+  // (funktioniert beim Hosting via GitHub Pages, read-only, ohne Token).
+  try {
+    const res = await fetch("data/results.json", { cache: "no-store" });
+    if (res.ok) {
+      const json = await res.json();
+      if (json && Array.isArray(json.games)) {
+        state = json;
+        saveLocal();
+        return;
+      }
+    }
+  } catch (e) { /* z.B. lokal per file:// geöffnet — kein Problem */ }
+  state = { games: [] };
+}
+
+function saveLocal() {
+  localStorage.setItem(LS_DATA_KEY, JSON.stringify(state));
+}
+
+/* ----------------------- Tabs ----------------------- */
+
+document.querySelectorAll(".tab-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".tab-btn").forEach(b => { b.classList.remove("active"); b.setAttribute("aria-selected", "false"); });
+    document.querySelectorAll(".tab-panel").forEach(p => p.classList.remove("active"));
+    btn.classList.add("active");
+    btn.setAttribute("aria-selected", "true");
+    document.getElementById("tab-" + btn.dataset.tab).classList.add("active");
+    if (btn.dataset.tab === "auswertung") renderAuswertung();
+  });
+});
+
+/* ----------------------- Eingabe: Rundenzeilen ----------------------- */
+
+function countryOptionsHtml(selected) {
+  return COUNTRIES.map(c => `<option value="${c}" ${c === selected ? "selected" : ""}>${c}</option>`).join("");
+}
+
+function addRoundRow(prefill) {
+  const list = document.getElementById("rounds-list");
+  const idx = list.children.length + 1;
+  const row = document.createElement("div");
+  row.className = "round-row";
+  row.innerHTML = `
+    <span class="round-index">${idx}</span>
+    <select class="r-country">
+      <option value="">Land wählen…</option>
+      ${countryOptionsHtml(prefill && prefill.country)}
+    </select>
+    <input type="number" class="r-distance" placeholder="Distanz (km)" min="0" step="0.1" value="${prefill ? prefill.distanceKm : ""}">
+    <input type="number" class="r-points" placeholder="Rel. Punkte" step="1" value="${prefill ? prefill.relativePoints : ""}">
+    <button type="button" class="remove-round" title="Runde entfernen">×</button>
+  `;
+  row.querySelector(".remove-round").addEventListener("click", () => {
+    row.remove();
+    renumberRounds();
+  });
+  list.appendChild(row);
+}
+
+function renumberRounds() {
+  document.querySelectorAll("#rounds-list .round-row").forEach((row, i) => {
+    row.querySelector(".round-index").textContent = i + 1;
+  });
+}
+
+document.getElementById("add-round-btn").addEventListener("click", () => addRoundRow());
+
+function resetEntryForm() {
+  document.getElementById("rounds-list").innerHTML = "";
+  document.getElementById("game-date").value = todayStr();
+  document.getElementById("game-note").value = "";
+  addRoundRow();
+  addRoundRow();
+  document.getElementById("entry-status").textContent = "";
+  document.getElementById("entry-status").className = "status-msg";
+}
+
+document.getElementById("save-game-btn").addEventListener("click", () => {
+  const statusEl = document.getElementById("entry-status");
+  const date = document.getElementById("game-date").value || todayStr();
+  const note = document.getElementById("game-note").value.trim();
+  const rows = [...document.querySelectorAll("#rounds-list .round-row")];
+
+  if (rows.length < 2) {
+    statusEl.textContent = "Eine Partie braucht mindestens 2 Runden.";
+    statusEl.className = "status-msg error";
+    return;
+  }
+
+  const rounds = [];
+  for (const row of rows) {
+    const country = row.querySelector(".r-country").value;
+    const distance = parseFloat(row.querySelector(".r-distance").value);
+    const points = parseFloat(row.querySelector(".r-points").value);
+    if (!country || isNaN(distance) || isNaN(points)) {
+      statusEl.textContent = "Bitte für jede Runde Land, Distanz und relative Punkte ausfüllen.";
+      statusEl.className = "status-msg error";
+      return;
+    }
+    rounds.push({ country, distanceKm: distance, relativePoints: points });
+  }
+
+  state.games.push({ id: genId(), date, note, rounds });
+  saveLocal();
+  statusEl.textContent = `Partie mit ${rounds.length} Runden gespeichert.`;
+  statusEl.className = "status-msg";
+  resetEntryForm();
+  renderRecentGames();
+});
+
+/* ----------------------- Eingabe: Zuletzt gespeichert ----------------------- */
+
+function renderRecentGames() {
+  const wrap = document.getElementById("recent-games");
+  const games = [...state.games].sort((a, b) => (a.date < b.date ? 1 : -1)).slice(0, 6);
+  if (games.length === 0) {
+    wrap.innerHTML = '<p class="empty-note">Noch keine Partien erfasst.</p>';
+    return;
+  }
+  wrap.innerHTML = games.map(g => {
+    const avgDist = g.rounds.reduce((s, r) => s + r.distanceKm, 0) / g.rounds.length;
+    const avgPts = g.rounds.reduce((s, r) => s + r.relativePoints, 0) / g.rounds.length;
+    const countries = g.rounds.map(r => r.country).join(", ");
+    return `
+      <div class="recent-game">
+        <div class="recent-game-head">
+          <span>${g.date}${g.note ? " · " + escapeHtml(g.note) : ""}</span>
+          <span>${g.rounds.length} Runden</span>
+        </div>
+        <div class="recent-game-rounds">${countries}</div>
+        <div class="recent-game-rounds"><span>Ø Distanz ${fmt(avgDist)} km · Ø Punkte ${fmt(avgPts, 0)}</span></div>
+        <button class="delete-game-btn" data-id="${g.id}">Partie löschen</button>
+      </div>`;
+  }).join("");
+
+  wrap.querySelectorAll(".delete-game-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      if (!confirm("Diese Partie wirklich löschen?")) return;
+      state.games = state.games.filter(g => g.id !== btn.dataset.id);
+      saveLocal();
+      renderRecentGames();
+    });
+  });
+}
+
+function escapeHtml(str) {
+  const d = document.createElement("div");
+  d.textContent = str;
+  return d.innerHTML;
+}
+
+/* ----------------------- Auswertung: Datenaufbereitung ----------------------- */
+
+function flattenRounds() {
+  const rows = [];
+  for (const g of state.games) {
+    g.rounds.forEach((r, i) => {
+      rows.push({
+        gameId: g.id, date: g.date, note: g.note || "",
+        roundNumber: i + 1, country: r.country,
+        distanceKm: r.distanceKm, relativePoints: r.relativePoints
+      });
+    });
+  }
+  return rows;
+}
+
+function getFilters() {
+  return {
+    country: document.getElementById("filter-country").value,
+    from: document.getElementById("filter-from").value,
+    to: document.getElementById("filter-to").value
+  };
+}
+
+function applyFilters(rows) {
+  const f = getFilters();
+  return rows.filter(r =>
+    (!f.country || r.country === f.country) &&
+    (!f.from || r.date >= f.from) &&
+    (!f.to || r.date <= f.to)
+  );
+}
+
+function populateCountryFilter() {
+  const sel = document.getElementById("filter-country");
+  const current = sel.value;
+  const used = [...new Set(state.games.flatMap(g => g.rounds.map(r => r.country)))].sort((a, b) => a.localeCompare(b, "de"));
+  sel.innerHTML = '<option value="">Alle Länder</option>' + used.map(c => `<option value="${c}">${c}</option>`).join("");
+  if (used.includes(current)) sel.value = current;
+}
+
+/* ----------------------- Auswertung: Summary-Karten ----------------------- */
+
+function renderSummaryCards(rows) {
+  const wrap = document.getElementById("summary-cards");
+  if (rows.length === 0) {
+    wrap.innerHTML = '<div class="stat-card"><div class="stat-label">Keine Daten</div><div class="stat-value">–</div><div class="stat-sub">Noch nichts erfasst oder Filter zu eng.</div></div>';
+    return;
+  }
+  const gamesUsed = new Set(rows.map(r => r.gameId)).size;
+  const avgDist = rows.reduce((s, r) => s + r.distanceKm, 0) / rows.length;
+  const avgPts = rows.reduce((s, r) => s + r.relativePoints, 0) / rows.length;
+  const best = rows.reduce((a, b) => (b.distanceKm < a.distanceKm ? b : a));
+  const bestPts = rows.reduce((a, b) => (b.relativePoints > a.relativePoints ? b : a));
+
+  const cards = [
+    { label: "Partien", value: gamesUsed, sub: `${rows.length} Runden gesamt` },
+    { label: "Ø Distanz", value: fmt(avgDist) + " km", sub: "über alle gefilterten Runden" },
+    { label: "Ø rel. Punkte", value: fmt(avgPts, 0), sub: avgPts >= 0 ? "im Schnitt vorn" : "im Schnitt hinten", neg: avgPts < 0 },
+    { label: "Beste Distanz", value: fmt(best.distanceKm) + " km", sub: `${best.country} · ${best.date}` },
+    { label: "Beste Punkte", value: fmt(bestPts.relativePoints, 0), sub: `${bestPts.country} · ${bestPts.date}` }
+  ];
+
+  wrap.innerHTML = cards.map(c => `
+    <div class="stat-card">
+      <div class="stat-label">${c.label}</div>
+      <div class="stat-value ${c.neg ? "negative" : ""}">${c.value}</div>
+      <div class="stat-sub">${c.sub}</div>
+    </div>`).join("");
+}
+
+/* ----------------------- Auswertung: Crosstab ----------------------- */
+
+function buildCrosstab(rows) {
+  const map = new Map();
+  for (const r of rows) {
+    if (!map.has(r.country)) map.set(r.country, []);
+    map.get(r.country).push(r);
+  }
+  return [...map.entries()].map(([country, list]) => ({
+    country,
+    rounds: list.length,
+    avgDistance: list.reduce((s, r) => s + r.distanceKm, 0) / list.length,
+    avgPoints: list.reduce((s, r) => s + r.relativePoints, 0) / list.length,
+    bestDistance: Math.min(...list.map(r => r.distanceKm)),
+    bestPoints: Math.max(...list.map(r => r.relativePoints))
+  }));
+}
+
+function renderCrosstab(rows) {
+  let data = buildCrosstab(rows);
+  const { key, dir } = sortState.crosstab;
+  data.sort((a, b) => {
+    const va = a[key], vb = b[key];
+    const cmp = typeof va === "string" ? va.localeCompare(vb, "de") : va - vb;
+    return dir === "asc" ? cmp : -cmp;
+  });
+  const tbody = document.querySelector("#crosstab-table tbody");
+  tbody.innerHTML = data.map(d => `
+    <tr>
+      <td>${d.country}</td>
+      <td class="mono">${d.rounds}</td>
+      <td class="mono">${fmt(d.avgDistance)}</td>
+      <td class="mono ${d.avgPoints < 0 ? "negative" : "positive"}">${fmt(d.avgPoints, 0)}</td>
+      <td class="mono">${fmt(d.bestDistance)}</td>
+      <td class="mono positive">${fmt(d.bestPoints, 0)}</td>
+    </tr>`).join("") || `<tr><td colspan="6">Keine Daten für die aktuelle Auswahl.</td></tr>`;
+  updateSortHeaderClasses("crosstab-table", key, dir);
+}
+
+/* ----------------------- Auswertung: Rundentabelle ----------------------- */
+
+function renderRoundsTable(rows) {
+  let data = [...rows];
+  const { key, dir } = sortState.rounds;
+  data.sort((a, b) => {
+    const va = a[key], vb = b[key];
+    const cmp = typeof va === "string" ? va.localeCompare(vb, "de") : va - vb;
+    return dir === "asc" ? cmp : -cmp;
+  });
+  const tbody = document.querySelector("#rounds-table tbody");
+  tbody.innerHTML = data.map(r => `
+    <tr>
+      <td class="mono">${r.date}</td>
+      <td>${escapeHtml(r.note)}</td>
+      <td class="mono">${r.roundNumber}</td>
+      <td>${r.country}</td>
+      <td class="mono">${fmt(r.distanceKm)}</td>
+      <td class="mono ${r.relativePoints < 0 ? "negative" : "positive"}">${fmt(r.relativePoints, 0)}</td>
+    </tr>`).join("") || `<tr><td colspan="6">Keine Daten für die aktuelle Auswahl.</td></tr>`;
+  updateSortHeaderClasses("rounds-table", key, dir);
+}
+
+function updateSortHeaderClasses(tableId, key, dir) {
+  document.querySelectorAll(`#${tableId} th`).forEach(th => {
+    th.classList.remove("sorted-asc", "sorted-desc");
+    if (th.dataset.sort === key) th.classList.add(dir === "asc" ? "sorted-asc" : "sorted-desc");
+  });
+}
+
+document.querySelectorAll("#crosstab-table th").forEach(th => {
+  th.addEventListener("click", () => {
+    const key = th.dataset.sort;
+    const s = sortState.crosstab;
+    s.dir = (s.key === key && s.dir === "desc") ? "asc" : "desc";
+    s.key = key;
+    renderAuswertung();
+  });
+});
+document.querySelectorAll("#rounds-table th").forEach(th => {
+  th.addEventListener("click", () => {
+    const key = th.dataset.sort;
+    const s = sortState.rounds;
+    s.dir = (s.key === key && s.dir === "desc") ? "asc" : "desc";
+    s.key = key;
+    renderAuswertung();
+  });
+});
+
+/* ----------------------- Auswertung: Charts ----------------------- */
+
+const CHART_COLORS = ["#4F6B4A", "#C99A3E", "#A4432C", "#5F7E90", "#8B6BA8", "#3A5137", "#7A8B4A"];
+
+function destroyChart(key) {
+  if (charts[key]) { charts[key].destroy(); delete charts[key]; }
+}
+
+function renderCharts(rows) {
+  renderTrendChart(rows);
+  renderScatterChart(rows);
+  renderCountryBar("chart-country-distance", rows, "avgDistance", "Ø Distanz (km)", CHART_COLORS[3]);
+  renderCountryBar("chart-country-points", rows, "avgPoints", "Ø rel. Punkte", CHART_COLORS[0]);
+}
+
+function renderTrendChart(rows) {
+  destroyChart("trend");
+  const byGame = new Map();
+  for (const r of rows) {
+    if (!byGame.has(r.gameId)) byGame.set(r.gameId, { date: r.date, dist: [], pts: [] });
+    const g = byGame.get(r.gameId);
+    g.dist.push(r.distanceKm); g.pts.push(r.relativePoints);
+  }
+  const games = [...byGame.values()].sort((a, b) => a.date.localeCompare(b.date));
+  const labels = games.map(g => g.date);
+  const avgDist = games.map(g => g.dist.reduce((s, v) => s + v, 0) / g.dist.length);
+  const avgPts = games.map(g => g.pts.reduce((s, v) => s + v, 0) / g.pts.length);
+
+  const ctx = document.getElementById("chart-trend");
+  charts.trend = new Chart(ctx, {
+    type: "line",
+    data: {
+      labels,
+      datasets: [
+        { label: "Ø Distanz (km)", data: avgDist, borderColor: CHART_COLORS[3], backgroundColor: "transparent", yAxisID: "y", tension: 0.25 },
+        { label: "Ø rel. Punkte", data: avgPts, borderColor: CHART_COLORS[0], backgroundColor: "transparent", yAxisID: "y1", tension: 0.25 }
+      ]
+    },
+    options: {
+      responsive: true,
+      interaction: { mode: "index", intersect: false },
+      scales: {
+        y: { type: "linear", position: "left", title: { display: true, text: "km" } },
+        y1: { type: "linear", position: "right", title: { display: true, text: "Punkte" }, grid: { drawOnChartArea: false } }
+      }
+    }
+  });
+}
+
+function renderScatterChart(rows) {
+  destroyChart("scatter");
+  const ctx = document.getElementById("chart-scatter");
+  charts.scatter = new Chart(ctx, {
+    type: "scatter",
+    data: {
+      datasets: [{
+        label: "Runde",
+        data: rows.map(r => ({ x: r.distanceKm, y: r.relativePoints, country: r.country })),
+        backgroundColor: CHART_COLORS[1]
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        tooltip: {
+          callbacks: {
+            label: (ctx) => `${ctx.raw.country}: ${fmt(ctx.raw.x)} km, ${fmt(ctx.raw.y, 0)} Pkt.`
+          }
+        },
+        legend: { display: false }
+      },
+      scales: {
+        x: { title: { display: true, text: "Distanz (km)" } },
+        y: { title: { display: true, text: "Relative Punkte" } }
+      }
+    }
+  });
+}
+
+function renderCountryBar(canvasId, rows, metric, axisLabel, color) {
+  const key = canvasId;
+  destroyChart(key);
+  const data = buildCrosstab(rows).sort((a, b) => b[metric] - a[metric]).slice(0, 15);
+  const ctx = document.getElementById(canvasId);
+  charts[key] = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: data.map(d => d.country),
+      datasets: [{ label: axisLabel, data: data.map(d => d[metric]), backgroundColor: color }]
+    },
+    options: {
+      responsive: true,
+      indexAxis: "y",
+      plugins: { legend: { display: false } },
+      scales: { x: { title: { display: true, text: axisLabel } } }
+    }
+  });
+}
+
+/* ----------------------- Auswertung: Master-Render ----------------------- */
+
+function renderAuswertung() {
+  populateCountryFilter();
+  const rows = applyFilters(flattenRounds());
+  renderSummaryCards(rows);
+  renderCrosstab(rows);
+  renderRoundsTable(rows);
+  renderCharts(rows);
+}
+
+["filter-country", "filter-from", "filter-to"].forEach(id => {
+  document.getElementById(id).addEventListener("change", renderAuswertung);
+});
+document.getElementById("filter-reset").addEventListener("click", () => {
+  document.getElementById("filter-country").value = "";
+  document.getElementById("filter-from").value = "";
+  document.getElementById("filter-to").value = "";
+  renderAuswertung();
+});
+
+/* ----------------------- Einstellungen: Export / Import / Löschen ----------------------- */
+
+document.getElementById("export-json-btn").addEventListener("click", () => {
+  const blob = new Blob([JSON.stringify(state, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `geoguessr-results-${todayStr()}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+});
+
+document.getElementById("import-json-input").addEventListener("change", (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    try {
+      const json = JSON.parse(reader.result);
+      if (!json || !Array.isArray(json.games)) throw new Error("Ungültiges Format");
+      if (confirm(`${json.games.length} Partien importieren? Das ersetzt den aktuellen lokalen Stand.`)) {
+        state = json;
+        saveLocal();
+        renderRecentGames();
+        renderAuswertung();
+      }
+    } catch (err) {
+      alert("Konnte die Datei nicht lesen: " + err.message);
+    }
+  };
+  reader.readAsText(file);
+  e.target.value = "";
+});
+
+document.getElementById("clear-data-btn").addEventListener("click", () => {
+  if (!confirm("Wirklich ALLE lokal gespeicherten Partien löschen? Das kann nicht rückgängig gemacht werden.")) return;
+  state = { games: [] };
+  saveLocal();
+  renderRecentGames();
+  renderAuswertung();
+});
+
+/* ----------------------- Einstellungen: GitHub-Sync ----------------------- */
+
+function ghLoadConfig() {
+  const raw = localStorage.getItem(LS_GH_CONFIG_KEY);
+  const cfg = raw ? JSON.parse(raw) : {};
+  document.getElementById("gh-owner").value = cfg.owner || "";
+  document.getElementById("gh-repo").value = cfg.repo || "";
+  document.getElementById("gh-branch").value = cfg.branch || "main";
+  document.getElementById("gh-path").value = cfg.path || "data/results.json";
+  document.getElementById("gh-token").value = cfg.token || "";
+}
+
+function ghReadConfig() {
+  return {
+    owner: document.getElementById("gh-owner").value.trim(),
+    repo: document.getElementById("gh-repo").value.trim(),
+    branch: document.getElementById("gh-branch").value.trim() || "main",
+    path: document.getElementById("gh-path").value.trim() || "data/results.json",
+    token: document.getElementById("gh-token").value.trim()
+  };
+}
+
+function ghStatus(msg, isError) {
+  const el = document.getElementById("gh-status");
+  el.textContent = msg;
+  el.className = "status-msg" + (isError ? " error" : "");
+}
+
+document.getElementById("gh-save-config-btn").addEventListener("click", () => {
+  localStorage.setItem(LS_GH_CONFIG_KEY, JSON.stringify(ghReadConfig()));
+  ghStatus("Konfiguration lokal gespeichert.");
+});
+
+function ghApiUrl(cfg) {
+  return `https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/${cfg.path}?ref=${encodeURIComponent(cfg.branch)}`;
+}
+
+document.getElementById("gh-pull-btn").addEventListener("click", async () => {
+  const cfg = ghReadConfig();
+  if (!cfg.owner || !cfg.repo) { ghStatus("Bitte Owner und Repository angeben.", true); return; }
+  ghStatus("Lade von GitHub …");
+  try {
+    const res = await fetch(ghApiUrl(cfg), {
+      headers: cfg.token ? { Authorization: `Bearer ${cfg.token}`, Accept: "application/vnd.github+json" } : { Accept: "application/vnd.github+json" }
+    });
+    if (!res.ok) throw new Error(`GitHub antwortete mit ${res.status}`);
+    const json = await res.json();
+    const content = base64ToUtf8(json.content.replace(/\n/g, ""));
+    const parsed = JSON.parse(content);
+    if (!Array.isArray(parsed.games)) throw new Error("Datei enthält kein gültiges Format");
+    if (confirm(`${parsed.games.length} Partien aus dem Repo laden? Das ersetzt den lokalen Stand.`)) {
+      state = parsed;
+      saveLocal();
+      renderRecentGames();
+      renderAuswertung();
+      ghStatus(`Geladen: ${parsed.games.length} Partien.`);
+    } else {
+      ghStatus("Abgebrochen.");
+    }
+  } catch (err) {
+    ghStatus("Fehler beim Laden: " + err.message, true);
+  }
+});
+
+document.getElementById("gh-push-btn").addEventListener("click", async () => {
+  const cfg = ghReadConfig();
+  if (!cfg.owner || !cfg.repo || !cfg.token) { ghStatus("Owner, Repository und Token werden zum Schreiben benötigt.", true); return; }
+  ghStatus("Speichere nach GitHub …");
+  try {
+    // Aktuelles sha der Datei ermitteln (falls vorhanden), sonst neu anlegen
+    let sha;
+    const getRes = await fetch(ghApiUrl(cfg), { headers: { Authorization: `Bearer ${cfg.token}`, Accept: "application/vnd.github+json" } });
+    if (getRes.ok) { const j = await getRes.json(); sha = j.sha; }
+
+    const body = {
+      message: `Update GeoGuessr-Log (${todayStr()})`,
+      content: utf8ToBase64(JSON.stringify(state, null, 2)),
+      branch: cfg.branch
+    };
+    if (sha) body.sha = sha;
+
+    const putRes = await fetch(`https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/${cfg.path}`, {
+      method: "PUT",
+      headers: { Authorization: `Bearer ${cfg.token}`, Accept: "application/vnd.github+json", "Content-Type": "application/json" },
+      body: JSON.stringify(body)
+    });
+    if (!putRes.ok) { const t = await putRes.text(); throw new Error(`${putRes.status}: ${t}`); }
+    ghStatus("Gespeichert — data/results.json im Repo aktualisiert.");
+  } catch (err) {
+    ghStatus("Fehler beim Speichern: " + err.message, true);
+  }
+});
+
+/* ----------------------- Init ----------------------- */
+
+(async function init() {
+  await loadInitialData();
+  ghLoadConfig();
+  resetEntryForm();
+  renderRecentGames();
+  renderAuswertung();
+})();
