@@ -1,3 +1,244 @@
 {
-  "games": []
+  "games": [
+    {
+      "id": "mrxtqyty-yqog4",
+      "date": "2026-07-23",
+      "mode": "Move",
+      "note": "",
+      "rounds": [
+        {
+          "country": "Argentinien",
+          "distanceKm": 356,
+          "relativePoints": -768,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Spanien",
+          "distanceKm": 10,
+          "relativePoints": 254,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Vereinigte Staaten",
+          "distanceKm": 1.7,
+          "relativePoints": 7491,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 1.5
+        }
+      ]
+    },
+    {
+      "id": "mrxu1d0s-3x6k1",
+      "date": "2026-07-23",
+      "mode": "Move",
+      "note": "",
+      "rounds": [
+        {
+          "country": "Nigeria",
+          "distanceKm": 589,
+          "relativePoints": -469,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Vanuatu",
+          "distanceKm": 9.3,
+          "relativePoints": 4969,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Australien",
+          "distanceKm": 3277,
+          "relativePoints": -6348,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 1.5
+        }
+      ]
+    },
+    {
+      "id": "mrxuequz-8z6y7",
+      "date": "2026-07-23",
+      "mode": "Move",
+      "note": "",
+      "rounds": [
+        {
+          "country": "Argentinien",
+          "distanceKm": 1.7,
+          "relativePoints": 1511,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Vereinigte Staaten",
+          "distanceKm": 2427,
+          "relativePoints": 417,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Vereinigtes Königreich",
+          "distanceKm": 161,
+          "relativePoints": 1460,
+          "multiplierActive": true,
+          "myMultiplier": 2,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Türkei",
+          "distanceKm": 82,
+          "relativePoints": 518,
+          "multiplierActive": true,
+          "myMultiplier": 2.5,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Australien",
+          "distanceKm": 2057,
+          "relativePoints": -106,
+          "multiplierActive": true,
+          "myMultiplier": 3,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Vereinigte Staaten",
+          "distanceKm": 154,
+          "relativePoints": -440,
+          "multiplierActive": true,
+          "myMultiplier": 3,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Südkorea",
+          "distanceKm": 127,
+          "relativePoints": -228,
+          "multiplierActive": true,
+          "myMultiplier": 3,
+          "oppMultiplier": 2
+        },
+        {
+          "country": "Vereinigte Staaten",
+          "distanceKm": 2114,
+          "relativePoints": -8395,
+          "multiplierActive": true,
+          "myMultiplier": 3,
+          "oppMultiplier": 2.5
+        }
+      ]
+    },
+    {
+      "id": "mrxv3t6x-bz18o",
+      "date": "2026-07-23",
+      "mode": "Move",
+      "note": "",
+      "rounds": [
+        {
+          "country": "Japan",
+          "distanceKm": 614,
+          "relativePoints": -1594,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Ungarn",
+          "distanceKm": 3.9,
+          "relativePoints": 289,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Australien",
+          "distanceKm": 2377,
+          "relativePoints": 188,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Bulgarien",
+          "distanceKm": 172,
+          "relativePoints": 316,
+          "multiplierActive": true,
+          "myMultiplier": 2,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Spanien",
+          "distanceKm": 247,
+          "relativePoints": 10,
+          "multiplierActive": true,
+          "myMultiplier": 2.5,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Vereinigte Staaten",
+          "distanceKm": 105,
+          "relativePoints": 57,
+          "multiplierActive": true,
+          "myMultiplier": 3,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Argentinien",
+          "distanceKm": 315,
+          "relativePoints": 2422,
+          "multiplierActive": true,
+          "myMultiplier": 3.5,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Japan",
+          "distanceKm": 53,
+          "relativePoints": -1476,
+          "multiplierActive": true,
+          "myMultiplier": 4,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Rumänien",
+          "distanceKm": 277,
+          "relativePoints": -1252,
+          "multiplierActive": true,
+          "myMultiplier": 4,
+          "oppMultiplier": 2
+        },
+        {
+          "country": "Belgien",
+          "distanceKm": 49,
+          "relativePoints": -234,
+          "multiplierActive": true,
+          "myMultiplier": 4,
+          "oppMultiplier": 2.5
+        },
+        {
+          "country": "Vereinigte Staaten",
+          "distanceKm": 35,
+          "relativePoints": -198,
+          "multiplierActive": true,
+          "myMultiplier": 4,
+          "oppMultiplier": 3
+        },
+        {
+          "country": "Neuseeland",
+          "distanceKm": 1.7,
+          "relativePoints": 7358,
+          "multiplierActive": true,
+          "myMultiplier": 4,
+          "oppMultiplier": 3.5
+        }
+      ]
+    }
+  ]
 }
