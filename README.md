@@ -11,6 +11,8 @@ geoguessr-tracker/
 ├── style.css
 ├── app.js               Logik, Rendering, Charts, GitHub-Sync
 ├── countries.js         Länderliste fürs Dropdown
+├── lib/
+│   └── chart.umd.min.js  Chart.js, lokal eingebunden (kein externes CDN nötig)
 └── data/
     └── results.json      Datendatei (siehe unten)
 ```

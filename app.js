@@ -461,10 +461,24 @@ function destroyChart(key) {
 }
 
 function renderCharts(rows) {
-  renderTrendChart(rows);
-  renderScatterChart(rows);
-  renderCountryBar("chart-country-distance", rows, "avgDistance", "Ø Distanz (km)", CHART_COLORS[3]);
-  renderCountryBar("chart-country-points", rows, "avgPoints", normalizeActive ? "Ø Punkte (bereinigt)" : "Ø rel. Punkte", CHART_COLORS[0]);
+  if (typeof Chart === "undefined") {
+    console.warn("Chart.js ist nicht geladen — Diagramme werden übersprungen.");
+    document.querySelectorAll(".chart-card canvas").forEach(c => {
+      const note = document.createElement("p");
+      note.className = "empty-note";
+      note.textContent = "Diagramm-Bibliothek konnte nicht geladen werden.";
+      c.replaceWith(note);
+    });
+    return;
+  }
+  try {
+    renderTrendChart(rows);
+    renderScatterChart(rows);
+    renderCountryBar("chart-country-distance", rows, "avgDistance", "Ø Distanz (km)", CHART_COLORS[3]);
+    renderCountryBar("chart-country-points", rows, "avgPoints", normalizeActive ? "Ø Punkte (bereinigt)" : "Ø rel. Punkte", CHART_COLORS[0]);
+  } catch (err) {
+    console.error("Fehler beim Rendern der Diagramme:", err);
+  }
 }
 
 function renderTrendChart(rows) {
