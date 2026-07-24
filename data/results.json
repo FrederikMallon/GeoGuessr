@@ -391,6 +391,78 @@
           "oppMultiplier": 1
         }
       ]
+    },
+    {
+      "id": "mrzen2rh-4ss1h",
+      "date": "2026-07-24",
+      "mode": "Move",
+      "note": "",
+      "rounds": [
+        {
+          "country": "Russland",
+          "distanceKm": 876,
+          "relativePoints": -1361,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Kanada",
+          "distanceKm": 286,
+          "relativePoints": 2146,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Neuseeland",
+          "distanceKm": 122,
+          "relativePoints": -432,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Rumänien",
+          "distanceKm": 2.4,
+          "relativePoints": 828,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 2
+        },
+        {
+          "country": "Vereinigtes Königreich",
+          "distanceKm": 107,
+          "relativePoints": 1266,
+          "multiplierActive": true,
+          "myMultiplier": 2,
+          "oppMultiplier": 2
+        },
+        {
+          "country": "Nigeria",
+          "distanceKm": 131,
+          "relativePoints": 470,
+          "multiplierActive": true,
+          "myMultiplier": 2.5,
+          "oppMultiplier": 2
+        },
+        {
+          "country": "Argentinien",
+          "distanceKm": 18,
+          "relativePoints": 792,
+          "multiplierActive": true,
+          "myMultiplier": 3,
+          "oppMultiplier": 2
+        },
+        {
+          "country": "Vietnam",
+          "distanceKm": 307,
+          "relativePoints": 928,
+          "multiplierActive": true,
+          "myMultiplier": 3.5,
+          "oppMultiplier": 2
+        }
+      ]
     }
   ]
 }
