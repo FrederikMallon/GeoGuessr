@@ -351,6 +351,46 @@
           "oppMultiplier": 1
         }
       ]
+    },
+    {
+      "id": "mrz6w7b0-c6qj7",
+      "date": "2026-07-24",
+      "mode": "Move",
+      "note": "",
+      "rounds": [
+        {
+          "country": "Kanada",
+          "distanceKm": 2.9,
+          "relativePoints": 65,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Vereinigte Staaten",
+          "distanceKm": 592,
+          "relativePoints": 2211,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Japan",
+          "distanceKm": 48,
+          "relativePoints": 1070,
+          "multiplierActive": true,
+          "myMultiplier": 2,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Chile",
+          "distanceKm": 0.446,
+          "relativePoints": 3365,
+          "multiplierActive": true,
+          "myMultiplier": 2.5,
+          "oppMultiplier": 1
+        }
+      ]
     }
   ]
 }
