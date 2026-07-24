@@ -311,6 +311,46 @@
           "oppMultiplier": 2.5
         }
       ]
+    },
+    {
+      "id": "mrz63uy3-varbb",
+      "date": "2026-07-24",
+      "mode": "Move",
+      "note": "",
+      "rounds": [
+        {
+          "country": "Indonesien",
+          "distanceKm": 33,
+          "relativePoints": 1224,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Bangladesch",
+          "distanceKm": 199,
+          "relativePoints": 4214,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Brasilien",
+          "distanceKm": 91,
+          "relativePoints": 544,
+          "multiplierActive": true,
+          "myMultiplier": 2,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Türkei",
+          "distanceKm": 253,
+          "relativePoints": 1035,
+          "multiplierActive": true,
+          "myMultiplier": 2.5,
+          "oppMultiplier": 1
+        }
+      ]
     }
   ]
 }
