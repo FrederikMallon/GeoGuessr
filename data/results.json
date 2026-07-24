@@ -239,6 +239,78 @@
           "oppMultiplier": 3.5
         }
       ]
+    },
+    {
+      "id": "mrz57kl2-ffrac",
+      "date": "2026-07-24",
+      "mode": "Move",
+      "note": "",
+      "rounds": [
+        {
+          "country": "Chile",
+          "distanceKm": 70,
+          "relativePoints": -226,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Irland",
+          "distanceKm": 38,
+          "relativePoints": -28,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Kanada",
+          "distanceKm": 2341,
+          "relativePoints": -5370,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 2
+        },
+        {
+          "country": "Finnland",
+          "distanceKm": 0.278,
+          "relativePoints": 33,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 2.5
+        },
+        {
+          "country": "Irland",
+          "distanceKm": 211,
+          "relativePoints": 400,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 2.5
+        },
+        {
+          "country": "Spanien",
+          "distanceKm": 18,
+          "relativePoints": 980,
+          "multiplierActive": true,
+          "myMultiplier": 2,
+          "oppMultiplier": 2.5
+        },
+        {
+          "country": "Schweden",
+          "distanceKm": 23,
+          "relativePoints": 65,
+          "multiplierActive": true,
+          "myMultiplier": 2.5,
+          "oppMultiplier": 2.5
+        },
+        {
+          "country": "Vereinigte Staaten",
+          "distanceKm": 900,
+          "relativePoints": -5508,
+          "multiplierActive": true,
+          "myMultiplier": 3,
+          "oppMultiplier": 2.5
+        }
+      ]
     }
   ]
 }
