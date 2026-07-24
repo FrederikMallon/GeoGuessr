@@ -288,8 +288,12 @@ function flattenRounds() {
         roundNumber: i + 1, country: r.country,
         distanceKm: r.distanceKm, relativePoints: r.relativePoints,
         myMultiplier, oppMultiplier,
-        // Bereinigte Punkte: eigenen Multiplikator rausrechnen (unbekannt -> ×1 angenommen)
-        normalizedPoints: r.relativePoints / (myMultiplier || 1)
+        // Bereinigte Punkte: bei positivem Wert (mein Vorsprung) den eigenen
+        // Multiplikator rausrechnen, bei negativem Wert (Vorsprung des Gegners)
+        // dessen Multiplikator. Unbekannt/deaktiviert -> ×1 angenommen.
+        normalizedPoints: r.relativePoints >= 0
+          ? r.relativePoints / (myMultiplier || 1)
+          : r.relativePoints / (oppMultiplier || 1)
       });
     });
   }
