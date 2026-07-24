@@ -424,9 +424,10 @@ function renderRoundsTable(rows) {
       <td>${r.country}</td>
       <td class="mono">${fmt(r.distanceKm)}</td>
       <td class="mono ${r.relativePoints < 0 ? "negative" : "positive"}">${fmt(r.relativePoints, 0)}</td>
+      <td class="mono ${r.normalizedPoints < 0 ? "negative" : "positive"}">${fmt(r.normalizedPoints, 1)}</td>
       <td class="mono">${r.myMultiplier !== null ? "×" + fmt(r.myMultiplier, 1) : "–"}</td>
       <td class="mono">${r.oppMultiplier !== null ? "×" + fmt(r.oppMultiplier, 1) : "–"}</td>
-    </tr>`).join("") || `<tr><td colspan="9">Keine Daten für die aktuelle Auswahl.</td></tr>`;
+    </tr>`).join("") || `<tr><td colspan="10">Keine Daten für die aktuelle Auswahl.</td></tr>`;
   updateSortHeaderClasses("rounds-table", key, dir);
 }
 
