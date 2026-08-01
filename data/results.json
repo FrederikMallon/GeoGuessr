@@ -463,6 +463,86 @@
           "oppMultiplier": 2
         }
       ]
+    },
+    {
+      "id": "msaohs0s-kv0wj",
+      "date": "2026-08-01",
+      "mode": "Move",
+      "note": "",
+      "rounds": [
+        {
+          "country": "Israel",
+          "distanceKm": 34,
+          "relativePoints": 28,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Nigeria",
+          "distanceKm": 362,
+          "relativePoints": -916,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Malaysia",
+          "distanceKm": 237,
+          "relativePoints": 90,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Mexiko",
+          "distanceKm": 36,
+          "relativePoints": 58,
+          "multiplierActive": true,
+          "myMultiplier": 2,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Litauen",
+          "distanceKm": 0.189,
+          "relativePoints": 18,
+          "multiplierActive": true,
+          "myMultiplier": 2.5,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Kenia",
+          "distanceKm": 224,
+          "relativePoints": -24,
+          "multiplierActive": true,
+          "myMultiplier": 3,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Kanada",
+          "distanceKm": 589,
+          "relativePoints": -2818,
+          "multiplierActive": true,
+          "myMultiplier": 3,
+          "oppMultiplier": 2
+        },
+        {
+          "country": "Indien",
+          "distanceKm": 5.5,
+          "relativePoints": 5661,
+          "multiplierActive": true,
+          "myMultiplier": 3,
+          "oppMultiplier": 2.5
+        },
+        {
+          "country": "Australien",
+          "distanceKm": 261,
+          "relativePoints": -819,
+          "multiplierActive": true,
+          "myMultiplier": 3.5,
+          "oppMultiplier": 2.5
+        }
+      ]
     }
   ]
 }
