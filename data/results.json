@@ -543,6 +543,70 @@
           "oppMultiplier": 2.5
         }
       ]
+    },
+    {
+      "id": "mshzz917-n4xl6",
+      "date": "2026-08-06",
+      "mode": "Move",
+      "note": "",
+      "rounds": [
+        {
+          "country": "Vereinigte Staaten",
+          "distanceKm": 594,
+          "relativePoints": -719,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Schweden",
+          "distanceKm": 8.4,
+          "relativePoints": -9,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Ukraine",
+          "distanceKm": 167,
+          "relativePoints": 2292,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 2
+        },
+        {
+          "country": "Kirgisistan",
+          "distanceKm": 322,
+          "relativePoints": -1922,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 2
+        },
+        {
+          "country": "Senegal",
+          "distanceKm": 1.8,
+          "relativePoints": 686,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 2.5
+        },
+        {
+          "country": "Kroatien",
+          "distanceKm": 2.2,
+          "relativePoints": -18,
+          "multiplierActive": true,
+          "myMultiplier": 2,
+          "oppMultiplier": 2.5
+        },
+        {
+          "country": "Mexiko",
+          "distanceKm": 2038,
+          "relativePoints": -9999,
+          "multiplierActive": true,
+          "myMultiplier": 2,
+          "oppMultiplier": 3
+        }
+      ]
     }
   ]
 }
