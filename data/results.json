@@ -607,6 +607,110 @@
           "oppMultiplier": 3
         }
       ]
+    },
+    {
+      "id": "msmdpd30-4y5wn",
+      "date": "2026-08-09",
+      "mode": "Move",
+      "note": "",
+      "rounds": [
+        {
+          "country": "Kanada",
+          "distanceKm": 0.451,
+          "relativePoints": 497,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Mexiko",
+          "distanceKm": 108,
+          "relativePoints": -61,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Indien",
+          "distanceKm": 770,
+          "relativePoints": -1984,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Kambodscha",
+          "distanceKm": 167,
+          "relativePoints": -296,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 2
+        },
+        {
+          "country": "Norwegen",
+          "distanceKm": 45,
+          "relativePoints": -302,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 2.5
+        },
+        {
+          "country": "Portugal",
+          "distanceKm": 10,
+          "relativePoints": 3,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 3
+        },
+        {
+          "country": "Argentinien",
+          "distanceKm": 165,
+          "relativePoints": 2698,
+          "multiplierActive": true,
+          "myMultiplier": 2,
+          "oppMultiplier": 3
+        },
+        {
+          "country": "Nepal",
+          "distanceKm": 193,
+          "relativePoints": 2175,
+          "multiplierActive": true,
+          "myMultiplier": 2.5,
+          "oppMultiplier": 3
+        },
+        {
+          "country": "Norwegen",
+          "distanceKm": 40,
+          "relativePoints": 120,
+          "multiplierActive": true,
+          "myMultiplier": 3,
+          "oppMultiplier": 3
+        },
+        {
+          "country": "Rumänien",
+          "distanceKm": 3.2,
+          "relativePoints": -33,
+          "multiplierActive": true,
+          "myMultiplier": 3.5,
+          "oppMultiplier": 3
+        },
+        {
+          "country": "Vereinigtes Königreich",
+          "distanceKm": 2.8,
+          "relativePoints": 0,
+          "multiplierActive": true,
+          "myMultiplier": 3.5,
+          "oppMultiplier": 3.5
+        },
+        {
+          "country": "Thailand",
+          "distanceKm": 191,
+          "relativePoints": 2696,
+          "multiplierActive": true,
+          "myMultiplier": 3.5,
+          "oppMultiplier": 3.5
+        }
+      ]
     }
   ]
 }
