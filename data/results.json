@@ -895,6 +895,78 @@
           "oppMultiplier": 1
         }
       ]
+    },
+    {
+      "id": "msp4pq6n-hgk94",
+      "date": "2026-08-11",
+      "mode": "Move",
+      "note": "",
+      "rounds": [
+        {
+          "country": "Vereinigte Staaten",
+          "distanceKm": 0.222,
+          "relativePoints": 2389,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Italien",
+          "distanceKm": 264,
+          "relativePoints": 1131,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Kanada",
+          "distanceKm": 24,
+          "relativePoints": 752,
+          "multiplierActive": true,
+          "myMultiplier": 2,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Island",
+          "distanceKm": 1949,
+          "relativePoints": -3488,
+          "multiplierActive": true,
+          "myMultiplier": 2.5,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Vietnam",
+          "distanceKm": 356,
+          "relativePoints": -826,
+          "multiplierActive": true,
+          "myMultiplier": 2.5,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Türkei",
+          "distanceKm": 25,
+          "relativePoints": 1630,
+          "multiplierActive": true,
+          "myMultiplier": 2.5,
+          "oppMultiplier": 2
+        },
+        {
+          "country": "Kanada",
+          "distanceKm": 12,
+          "relativePoints": -76,
+          "multiplierActive": true,
+          "myMultiplier": 3,
+          "oppMultiplier": 2
+        },
+        {
+          "country": "Estland",
+          "distanceKm": 0.355,
+          "relativePoints": 0,
+          "multiplierActive": true,
+          "myMultiplier": 3,
+          "oppMultiplier": 2.5
+        }
+      ]
     }
   ]
 }
