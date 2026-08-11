@@ -815,6 +815,62 @@
           "oppMultiplier": 3.5
         }
       ]
+    },
+    {
+      "id": "msp3wpdw-w1eoc",
+      "date": "2026-08-11",
+      "mode": "Move",
+      "note": "",
+      "rounds": [
+        {
+          "country": "Thailand",
+          "distanceKm": 225,
+          "relativePoints": -18,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Südafrika",
+          "distanceKm": 1.2,
+          "relativePoints": 317,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Japan",
+          "distanceKm": 401,
+          "relativePoints": -678,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Kanada",
+          "distanceKm": 5.9,
+          "relativePoints": -30,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 2
+        },
+        {
+          "country": "Vietnam",
+          "distanceKm": 207,
+          "relativePoints": 978,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 2.5
+        },
+        {
+          "country": "Polen",
+          "distanceKm": 0.002,
+          "relativePoints": 0,
+          "multiplierActive": true,
+          "myMultiplier": 2,
+          "oppMultiplier": 2.5
+        }
+      ]
     }
   ]
 }
