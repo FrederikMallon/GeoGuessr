@@ -871,6 +871,30 @@
           "oppMultiplier": 2.5
         }
       ]
+    },
+    {
+      "id": "msp43xj2-9qz1c",
+      "date": "2026-08-11",
+      "mode": "Move",
+      "note": "",
+      "rounds": [
+        {
+          "country": "Südafrika",
+          "distanceKm": 56,
+          "relativePoints": 2007,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Brasilien",
+          "distanceKm": 202,
+          "relativePoints": 4362,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 1
+        }
+      ]
     }
   ]
 }
