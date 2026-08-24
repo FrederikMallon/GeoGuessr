@@ -1015,6 +1015,78 @@
           "oppMultiplier": 2.5
         }
       ]
+    },
+    {
+      "id": "mt7c3jn5-f5v3t",
+      "date": "2026-08-23",
+      "mode": "Move",
+      "note": "",
+      "rounds": [
+        {
+          "country": "Finnland",
+          "distanceKm": 57,
+          "relativePoints": 17,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Spanien",
+          "distanceKm": 122,
+          "relativePoints": 16,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Frankreich",
+          "distanceKm": 244,
+          "relativePoints": 1892,
+          "multiplierActive": true,
+          "myMultiplier": 2,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Peru",
+          "distanceKm": 223,
+          "relativePoints": 1405,
+          "multiplierActive": true,
+          "myMultiplier": 2.5,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Japan",
+          "distanceKm": 264,
+          "relativePoints": -22,
+          "multiplierActive": true,
+          "myMultiplier": 3,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Frankreich",
+          "distanceKm": 382,
+          "relativePoints": 1794,
+          "multiplierActive": true,
+          "myMultiplier": 3,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Indien",
+          "distanceKm": 849,
+          "relativePoints": -1023,
+          "multiplierActive": true,
+          "myMultiplier": 3.5,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Russland",
+          "distanceKm": 666,
+          "relativePoints": 4718,
+          "multiplierActive": true,
+          "myMultiplier": 3.5,
+          "oppMultiplier": 2
+        }
+      ]
     }
   ]
 }
