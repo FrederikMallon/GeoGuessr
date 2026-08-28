@@ -1087,6 +1087,46 @@
           "oppMultiplier": 2
         }
       ]
+    },
+    {
+      "id": "mtd91hm9-j6073",
+      "date": "2026-08-28",
+      "mode": "Move",
+      "note": "",
+      "rounds": [
+        {
+          "country": "Slowakei",
+          "distanceKm": 53,
+          "relativePoints": 4828,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Südafrika",
+          "distanceKm": 340,
+          "relativePoints": -995,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Ecuador",
+          "distanceKm": 989,
+          "relativePoints": -2607,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Brasilien",
+          "distanceKm": 159,
+          "relativePoints": 2932,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 2
+        }
+      ]
     }
   ]
 }
