@@ -1127,6 +1127,38 @@
           "oppMultiplier": 2
         }
       ]
+    },
+    {
+      "id": "mtdejzdv-k9edt",
+      "date": "2026-08-28",
+      "mode": "Move",
+      "note": "",
+      "rounds": [
+        {
+          "country": "Schweden",
+          "distanceKm": 1006,
+          "relativePoints": -2298,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Philippinen",
+          "distanceKm": 5.4,
+          "relativePoints": 0.001,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Australien",
+          "distanceKm": 2,
+          "relativePoints": -6734,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 1.5
+        }
+      ]
     }
   ]
 }
