@@ -1159,6 +1159,86 @@
           "oppMultiplier": 1.5
         }
       ]
+    },
+    {
+      "id": "mthkyf42-ct4p5",
+      "date": "2026-08-31",
+      "mode": "Move",
+      "note": "",
+      "rounds": [
+        {
+          "country": "Ghana",
+          "distanceKm": 85,
+          "relativePoints": 230,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Russland",
+          "distanceKm": 13,
+          "relativePoints": 3741,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Taiwan",
+          "distanceKm": 121,
+          "relativePoints": -30,
+          "multiplierActive": true,
+          "myMultiplier": 2,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Deutschland",
+          "distanceKm": 188,
+          "relativePoints": -400,
+          "multiplierActive": true,
+          "myMultiplier": 2,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Guatemala",
+          "distanceKm": 151,
+          "relativePoints": 234,
+          "multiplierActive": true,
+          "myMultiplier": 2,
+          "oppMultiplier": 2
+        },
+        {
+          "country": "Mexiko",
+          "distanceKm": 2.3,
+          "relativePoints": 575,
+          "multiplierActive": true,
+          "myMultiplier": 2.5,
+          "oppMultiplier": 2
+        },
+        {
+          "country": "Russland",
+          "distanceKm": 194,
+          "relativePoints": -618,
+          "multiplierActive": true,
+          "myMultiplier": 3,
+          "oppMultiplier": 2
+        },
+        {
+          "country": "Vereinigtes Königreich",
+          "distanceKm": 0.193,
+          "relativePoints": 300,
+          "multiplierActive": true,
+          "myMultiplier": 3,
+          "oppMultiplier": 2.5
+        },
+        {
+          "country": "Frankreich",
+          "distanceKm": 90,
+          "relativePoints": 920,
+          "multiplierActive": true,
+          "myMultiplier": 3.5,
+          "oppMultiplier": 2.5
+        }
+      ]
     }
   ]
 }
