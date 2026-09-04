@@ -1239,6 +1239,78 @@
           "oppMultiplier": 2.5
         }
       ]
+    },
+    {
+      "id": "mtmp0auo-hfm1p",
+      "date": "2026-09-04",
+      "mode": "Move",
+      "note": "",
+      "rounds": [
+        {
+          "country": "Australien",
+          "distanceKm": 30,
+          "relativePoints": 18,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Deutschland",
+          "distanceKm": 0.225,
+          "relativePoints": -1,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Australien",
+          "distanceKm": 31,
+          "relativePoints": 399,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Vietnam",
+          "distanceKm": 2.2,
+          "relativePoints": 740,
+          "multiplierActive": true,
+          "myMultiplier": 2,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Kolumbien",
+          "distanceKm": 31,
+          "relativePoints": 1830,
+          "multiplierActive": true,
+          "myMultiplier": 2.5,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Israel",
+          "distanceKm": 18,
+          "relativePoints": 960,
+          "multiplierActive": true,
+          "myMultiplier": 3,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Kanada",
+          "distanceKm": 40,
+          "relativePoints": 770,
+          "multiplierActive": true,
+          "myMultiplier": 3.5,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Mexiko",
+          "distanceKm": 0.468,
+          "relativePoints": 19868,
+          "multiplierActive": true,
+          "myMultiplier": 4,
+          "oppMultiplier": 1.5
+        }
+      ]
     }
   ]
 }
