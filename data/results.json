@@ -1311,6 +1311,134 @@
           "oppMultiplier": 1.5
         }
       ]
+    },
+    {
+      "id": "mtvyjlxg-ab0wm",
+      "date": "2026-09-10",
+      "mode": "Move",
+      "note": "",
+      "rounds": [
+        {
+          "country": "Indien",
+          "distanceKm": 255,
+          "relativePoints": 264,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Taiwan",
+          "distanceKm": 224,
+          "relativePoints": -259,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Nigeria",
+          "distanceKm": 219,
+          "relativePoints": -838,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Montenegro",
+          "distanceKm": 6.7,
+          "relativePoints": 3,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 2
+        },
+        {
+          "country": "Brasilien",
+          "distanceKm": 336,
+          "relativePoints": -2000,
+          "multiplierActive": true,
+          "myMultiplier": 2,
+          "oppMultiplier": 2
+        },
+        {
+          "country": "Slowakei",
+          "distanceKm": 139,
+          "relativePoints": -602,
+          "multiplierActive": true,
+          "myMultiplier": 2,
+          "oppMultiplier": 2.5
+        },
+        {
+          "country": "Australien",
+          "distanceKm": 48,
+          "relativePoints": -342,
+          "multiplierActive": true,
+          "myMultiplier": 2,
+          "oppMultiplier": 3
+        },
+        {
+          "country": "Türkei",
+          "distanceKm": 397,
+          "relativePoints": -1610,
+          "multiplierActive": true,
+          "myMultiplier": 2,
+          "oppMultiplier": 3.5
+        },
+        {
+          "country": "Mexiko",
+          "distanceKm": 408,
+          "relativePoints": -4408,
+          "multiplierActive": true,
+          "myMultiplier": 2,
+          "oppMultiplier": 4
+        }
+      ]
+    },
+    {
+      "id": "mtvylwce-rodoy",
+      "date": "2026-09-10",
+      "mode": "Move",
+      "note": "",
+      "rounds": [
+        {
+          "country": "Schweden",
+          "distanceKm": 168,
+          "relativePoints": -407,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Ecuador",
+          "distanceKm": 160,
+          "relativePoints": -87,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Malaysia",
+          "distanceKm": 8.9,
+          "relativePoints": 26,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 2
+        },
+        {
+          "country": "Griechenland",
+          "distanceKm": 106,
+          "relativePoints": -370,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 2
+        },
+        {
+          "country": "Peru",
+          "distanceKm": 865,
+          "relativePoints": -5458,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 2.5
+        }
+      ]
     }
   ]
 }
