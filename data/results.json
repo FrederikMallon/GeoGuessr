@@ -1439,6 +1439,54 @@
           "oppMultiplier": 2.5
         }
       ]
+    },
+    {
+      "id": "mtyj5hot-4npm1",
+      "date": "2026-09-12",
+      "mode": "Move",
+      "note": "",
+      "rounds": [
+        {
+          "country": "Chile",
+          "distanceKm": 1838,
+          "relativePoints": -3331,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Eswatini",
+          "distanceKm": 4700,
+          "relativePoints": 210,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Malaysia",
+          "distanceKm": 123,
+          "relativePoints": 3316,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Chile",
+          "distanceKm": 383,
+          "relativePoints": -1556,
+          "multiplierActive": true,
+          "myMultiplier": 2,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Indonesien",
+          "distanceKm": 826,
+          "relativePoints": -4080,
+          "multiplierActive": true,
+          "myMultiplier": 2,
+          "oppMultiplier": 2
+        }
+      ]
     }
   ]
 }
