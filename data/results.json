@@ -1487,6 +1487,86 @@
           "oppMultiplier": 2
         }
       ]
+    },
+    {
+      "id": "mtyjdaqh-v5w6r",
+      "date": "2026-09-12",
+      "mode": "Move",
+      "note": "",
+      "rounds": [
+        {
+          "country": "Australien",
+          "distanceKm": 70,
+          "relativePoints": 4740,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Vereinigte Staaten",
+          "distanceKm": 82,
+          "relativePoints": 3380,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "mtyjr9to-8fci1",
+      "date": "2026-09-12",
+      "mode": "Move",
+      "note": "",
+      "rounds": [
+        {
+          "country": "Deutschland",
+          "distanceKm": 0.091,
+          "relativePoints": 7,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Südafrika",
+          "distanceKm": 542,
+          "relativePoints": 6.9,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Deutschland",
+          "distanceKm": 0.005,
+          "relativePoints": 140,
+          "multiplierActive": true,
+          "myMultiplier": 2,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Mexiko",
+          "distanceKm": 1190,
+          "relativePoints": -3536,
+          "multiplierActive": true,
+          "myMultiplier": 2.5,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Lesotho",
+          "distanceKm": 207,
+          "relativePoints": -1332,
+          "multiplierActive": true,
+          "myMultiplier": 2.5,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Malaysia",
+          "distanceKm": 459,
+          "relativePoints": -2152,
+          "multiplierActive": true,
+          "myMultiplier": 2.5,
+          "oppMultiplier": 2
+        }
+      ]
     }
   ]
 }
