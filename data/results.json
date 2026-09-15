@@ -1623,6 +1623,78 @@
           "oppMultiplier": 2
         }
       ]
+    },
+    {
+      "id": "mu366fhd-y1kz4",
+      "date": "2026-09-15",
+      "mode": "Move",
+      "note": "",
+      "rounds": [
+        {
+          "country": "Spanien",
+          "distanceKm": 0.058,
+          "relativePoints": 9,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Kenia",
+          "distanceKm": 113,
+          "relativePoints": -328,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Philippinen",
+          "distanceKm": 597,
+          "relativePoints": -2186,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Dänemark",
+          "distanceKm": 19,
+          "relativePoints": 466,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 2
+        },
+        {
+          "country": "Vereinigte Staaten",
+          "distanceKm": 584,
+          "relativePoints": -3224,
+          "multiplierActive": true,
+          "myMultiplier": 2,
+          "oppMultiplier": 2
+        },
+        {
+          "country": "Norwegen",
+          "distanceKm": 8.6,
+          "relativePoints": -58,
+          "multiplierActive": true,
+          "myMultiplier": 2,
+          "oppMultiplier": 2.5
+        },
+        {
+          "country": "Australien",
+          "distanceKm": 1.9,
+          "relativePoints": 26,
+          "multiplierActive": true,
+          "myMultiplier": 2,
+          "oppMultiplier": 3
+        },
+        {
+          "country": "Indien",
+          "distanceKm": 1903,
+          "relativePoints": -5055,
+          "multiplierActive": true,
+          "myMultiplier": 2.5,
+          "oppMultiplier": 3
+        }
+      ]
     }
   ]
 }
