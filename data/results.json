@@ -1695,6 +1695,70 @@
           "oppMultiplier": 3
         }
       ]
+    },
+    {
+      "id": "mu36jktd-tagnv",
+      "date": "2026-09-15",
+      "mode": "Move",
+      "note": "",
+      "rounds": [
+        {
+          "country": "Griechenland",
+          "distanceKm": 0.302,
+          "relativePoints": 800,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Vereinigte Staaten",
+          "distanceKm": 107,
+          "relativePoints": -307,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Australien",
+          "distanceKm": 18,
+          "relativePoints": 2740,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Türkei",
+          "distanceKm": 103,
+          "relativePoints": -129,
+          "multiplierActive": true,
+          "myMultiplier": 2,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Australien",
+          "distanceKm": 182,
+          "relativePoints": -1142,
+          "multiplierActive": true,
+          "myMultiplier": 2,
+          "oppMultiplier": 2
+        },
+        {
+          "country": "Vereinigtes Königreich",
+          "distanceKm": 612,
+          "relativePoints": -2610,
+          "multiplierActive": true,
+          "myMultiplier": 2,
+          "oppMultiplier": 2.5
+        },
+        {
+          "country": "Vereinigte Staaten",
+          "distanceKm": 27,
+          "relativePoints": 2878,
+          "multiplierActive": true,
+          "myMultiplier": 2,
+          "oppMultiplier": 3
+        }
+      ]
     }
   ]
 }
