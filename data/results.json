@@ -1567,6 +1567,62 @@
           "oppMultiplier": 2
         }
       ]
+    },
+    {
+      "id": "mu2xdm2z-kdddr",
+      "date": "2026-09-15",
+      "mode": "Move",
+      "note": "",
+      "rounds": [
+        {
+          "country": "Italien",
+          "distanceKm": 867,
+          "relativePoints": -521,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Russland",
+          "distanceKm": 0.157,
+          "relativePoints": 1603,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Israel",
+          "distanceKm": 0.499,
+          "relativePoints": 501,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Deutschland",
+          "distanceKm": 116,
+          "relativePoints": 188,
+          "multiplierActive": true,
+          "myMultiplier": 2,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Deutschland",
+          "distanceKm": 132,
+          "relativePoints": -624,
+          "multiplierActive": true,
+          "myMultiplier": 2.5,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Japan",
+          "distanceKm": 40,
+          "relativePoints": 5340,
+          "multiplierActive": true,
+          "myMultiplier": 2.5,
+          "oppMultiplier": 2
+        }
+      ]
     }
   ]
 }
