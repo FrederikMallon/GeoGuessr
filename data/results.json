@@ -1759,6 +1759,54 @@
           "oppMultiplier": 3
         }
       ]
+    },
+    {
+      "id": "mu3ypei5-u7g8b",
+      "date": "2026-09-16",
+      "mode": "Move",
+      "note": "",
+      "rounds": [
+        {
+          "country": "Kolumbien",
+          "distanceKm": 203,
+          "relativePoints": -607,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Vereinigte Staaten",
+          "distanceKm": 0.529,
+          "relativePoints": 1,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Brasilien",
+          "distanceKm": 102,
+          "relativePoints": 174,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Griechenland",
+          "distanceKm": 1.9,
+          "relativePoints": 2160,
+          "multiplierActive": true,
+          "myMultiplier": 2,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Vereinigte Staaten",
+          "distanceKm": 1.3,
+          "relativePoints": 4842,
+          "multiplierActive": true,
+          "myMultiplier": 2.5,
+          "oppMultiplier": 1.5
+        }
+      ]
     }
   ]
 }
