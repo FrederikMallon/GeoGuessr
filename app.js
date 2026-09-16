@@ -523,7 +523,9 @@ function renderTrendChart(rows) {
 
 function renderScatterChart(rows) {
   destroyChart("scatter");
-  const data = buildCrosstab(rows); // ein Eintrag pro Land: {country, rounds, avgDistance, avgPoints, ...}
+  const totalRounds = rows.length;
+  const threshold = totalRounds > 0 ? totalRounds * 0.02 : 0;
+  const data = buildCrosstab(rows).filter(d => d.rounds >= threshold); // ein Eintrag pro Land, nur ab 2% Rundenanteil
   const ctx = document.getElementById("chart-scatter");
   charts.scatter = new Chart(ctx, {
     type: "scatter",
