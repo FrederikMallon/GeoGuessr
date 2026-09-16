@@ -523,14 +523,17 @@ function renderTrendChart(rows) {
 
 function renderScatterChart(rows) {
   destroyChart("scatter");
+  const data = buildCrosstab(rows); // ein Eintrag pro Land: {country, rounds, avgDistance, avgPoints, ...}
   const ctx = document.getElementById("chart-scatter");
   charts.scatter = new Chart(ctx, {
     type: "scatter",
     data: {
       datasets: [{
-        label: "Runde",
-        data: rows.map(r => ({ x: r.distanceKm, y: pointsOf(r), country: r.country })),
-        backgroundColor: CHART_COLORS[1]
+        label: "Land",
+        data: data.map(d => ({ x: d.avgPoints, y: d.avgDistance, country: d.country, rounds: d.rounds })),
+        backgroundColor: CHART_COLORS[1],
+        pointRadius: 6,
+        pointHoverRadius: 8
       }]
     },
     options: {
@@ -538,14 +541,20 @@ function renderScatterChart(rows) {
       plugins: {
         tooltip: {
           callbacks: {
-            label: (ctx) => `${ctx.raw.country}: ${fmt(ctx.raw.x)} km, ${fmt(ctx.raw.y, normalizeActive ? 1 : 0)} Pkt.`
+            label: (ctx) => `${ctx.raw.country} (${ctx.raw.rounds} Runden): Ø ${fmt(ctx.raw.x, normalizeActive ? 1 : 0)} Pkt., Ø ${fmt(ctx.raw.y)} km`
           }
         },
         legend: { display: false }
       },
       scales: {
-        x: { title: { display: true, text: "Distanz (km)" } },
-        y: { title: { display: true, text: normalizeActive ? "Punkte (bereinigt)" : "Relative Punkte" } }
+        x: {
+          title: { display: true, text: normalizeActive ? "Ø Punkte (bereinigt)" : "Ø relative Punkte" }
+          // linear, nicht log: Punktedurchschnitt kann negativ/0 werden, log-Skalen vertragen das bei Chart.js nicht.
+        },
+        y: {
+          type: "logarithmic",
+          title: { display: true, text: "Ø Distanz (km, log.)" }
+        }
       }
     }
   });
