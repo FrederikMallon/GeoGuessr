@@ -1807,6 +1807,70 @@
           "oppMultiplier": 1.5
         }
       ]
+    },
+    {
+      "id": "mu4drgyw-zu4re",
+      "date": "2026-09-16",
+      "mode": "Move",
+      "note": "",
+      "rounds": [
+        {
+          "country": "Brasilien",
+          "distanceKm": 432,
+          "relativePoints": -1093,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Kanada",
+          "distanceKm": 5.4,
+          "relativePoints": -27,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Australien",
+          "distanceKm": 157,
+          "relativePoints": 1258,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 2
+        },
+        {
+          "country": "Philippinen",
+          "distanceKm": 0.028,
+          "relativePoints": 2043,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 2
+        },
+        {
+          "country": "Kirgisistan",
+          "distanceKm": 171,
+          "relativePoints": 550,
+          "multiplierActive": true,
+          "myMultiplier": 2,
+          "oppMultiplier": 2
+        },
+        {
+          "country": "Bangladesch",
+          "distanceKm": 779,
+          "relativePoints": -3498,
+          "multiplierActive": true,
+          "myMultiplier": 2.5,
+          "oppMultiplier": 2
+        },
+        {
+          "country": "Peru",
+          "distanceKm": 397,
+          "relativePoints": 2600,
+          "multiplierActive": true,
+          "myMultiplier": 2.5,
+          "oppMultiplier": 2.5
+        }
+      ]
     }
   ]
 }
