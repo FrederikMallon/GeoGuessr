@@ -1871,6 +1871,110 @@
           "oppMultiplier": 2.5
         }
       ]
+    },
+    {
+      "id": "mu5e37zi-bzsl5",
+      "date": "2026-09-17",
+      "mode": "Move",
+      "note": "",
+      "rounds": [
+        {
+          "country": "Ungarn",
+          "distanceKm": 0.003,
+          "relativePoints": 887,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Singapur",
+          "distanceKm": 12,
+          "relativePoints": -13,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Vereinigte Staaten",
+          "distanceKm": 1.4,
+          "relativePoints": 632,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Kenia",
+          "distanceKm": 11933,
+          "relativePoints": -7467,
+          "multiplierActive": true,
+          "myMultiplier": 2,
+          "oppMultiplier": 1.5
+        }
+      ]
+    },
+    {
+      "id": "mu5f1g3v-b0px3",
+      "date": "2026-09-17",
+      "mode": "Move",
+      "note": "",
+      "rounds": [
+        {
+          "country": "Senegal",
+          "distanceKm": 0.464,
+          "relativePoints": 934,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Italien",
+          "distanceKm": 31,
+          "relativePoints": 144,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Chile",
+          "distanceKm": 568,
+          "relativePoints": -1455,
+          "multiplierActive": true,
+          "myMultiplier": 2,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Indien",
+          "distanceKm": 39,
+          "relativePoints": 2792,
+          "multiplierActive": true,
+          "myMultiplier": 2,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Vereinigte Staaten",
+          "distanceKm": 765,
+          "relativePoints": -2996,
+          "multiplierActive": true,
+          "myMultiplier": 2.5,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Indien",
+          "distanceKm": 235,
+          "relativePoints": 1560,
+          "multiplierActive": true,
+          "myMultiplier": 2.5,
+          "oppMultiplier": 2
+        },
+        {
+          "country": "Argentinien",
+          "distanceKm": 0.588,
+          "relativePoints": 7995,
+          "multiplierActive": true,
+          "myMultiplier": 3,
+          "oppMultiplier": 2
+        }
+      ]
     }
   ]
 }
