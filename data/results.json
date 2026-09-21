@@ -2279,6 +2279,94 @@
           "oppMultiplier": 2
         }
       ]
+    },
+    {
+      "id": "mube87sf-vckuy",
+      "date": "2026-09-21",
+      "mode": "Move",
+      "note": "",
+      "rounds": [
+        {
+          "country": "Brasilien",
+          "distanceKm": 345,
+          "relativePoints": 2458,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Vereinigte Arabische Emirate",
+          "distanceKm": 61,
+          "relativePoints": 612,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Senegal",
+          "distanceKm": 97,
+          "relativePoints": -33,
+          "multiplierActive": true,
+          "myMultiplier": 2,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Norwegen",
+          "distanceKm": 187,
+          "relativePoints": -828,
+          "multiplierActive": true,
+          "myMultiplier": 2,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Lettland",
+          "distanceKm": 252,
+          "relativePoints": 250,
+          "multiplierActive": true,
+          "myMultiplier": 2,
+          "oppMultiplier": 2
+        },
+        {
+          "country": "Vereinigte Staaten",
+          "distanceKm": 990,
+          "relativePoints": -2524,
+          "multiplierActive": true,
+          "myMultiplier": 2.5,
+          "oppMultiplier": 2
+        },
+        {
+          "country": "Bolivien",
+          "distanceKm": 3.8,
+          "relativePoints": 1755,
+          "multiplierActive": true,
+          "myMultiplier": 2.5,
+          "oppMultiplier": 2.5
+        },
+        {
+          "country": "Türkei",
+          "distanceKm": 410,
+          "relativePoints": -1802,
+          "multiplierActive": true,
+          "myMultiplier": 3,
+          "oppMultiplier": 2.5
+        },
+        {
+          "country": "Russland",
+          "distanceKm": 7725,
+          "relativePoints": -198,
+          "multiplierActive": true,
+          "myMultiplier": 3,
+          "oppMultiplier": 3
+        },
+        {
+          "country": "Australien",
+          "distanceKm": 690,
+          "relativePoints": 3057,
+          "multiplierActive": true,
+          "myMultiplier": 3,
+          "oppMultiplier": 3.5
+        }
+      ]
     }
   ]
 }
