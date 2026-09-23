@@ -2367,6 +2367,94 @@
           "oppMultiplier": 3.5
         }
       ]
+    },
+    {
+      "id": "mudzkxyt-sstb1",
+      "date": "2026-09-23",
+      "mode": "Move",
+      "note": "",
+      "rounds": [
+        {
+          "country": "Guatemala",
+          "distanceKm": 91,
+          "relativePoints": -81,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Kanada",
+          "distanceKm": 65,
+          "relativePoints": -18,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Bangladesch",
+          "distanceKm": 326,
+          "relativePoints": -1226,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 2
+        },
+        {
+          "country": "Brasilien",
+          "distanceKm": 143,
+          "relativePoints": 1404,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 2.5
+        },
+        {
+          "country": "Bangladesch",
+          "distanceKm": 0.853,
+          "relativePoints": 99,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 2.5
+        },
+        {
+          "country": "Spanien",
+          "distanceKm": 0.158,
+          "relativePoints": 398,
+          "multiplierActive": true,
+          "myMultiplier": 2,
+          "oppMultiplier": 2.5
+        },
+        {
+          "country": "Norwegen",
+          "distanceKm": 0.816,
+          "relativePoints": 3328,
+          "multiplierActive": true,
+          "myMultiplier": 2.5,
+          "oppMultiplier": 2.5
+        },
+        {
+          "country": "Bulgarien",
+          "distanceKm": 0.334,
+          "relativePoints": 3,
+          "multiplierActive": true,
+          "myMultiplier": 3,
+          "oppMultiplier": 2.5
+        },
+        {
+          "country": "Japan",
+          "distanceKm": 137,
+          "relativePoints": -900,
+          "multiplierActive": true,
+          "myMultiplier": 3.5,
+          "oppMultiplier": 2.5
+        },
+        {
+          "country": "Vereinigte Staaten",
+          "distanceKm": 2,
+          "relativePoints": 7917,
+          "multiplierActive": true,
+          "myMultiplier": 3.5,
+          "oppMultiplier": 3
+        }
+      ]
     }
   ]
 }
