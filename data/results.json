@@ -2455,6 +2455,54 @@
           "oppMultiplier": 3
         }
       ]
+    },
+    {
+      "id": "muk699v1-8b6mj",
+      "date": "2026-09-27",
+      "mode": "Move",
+      "note": "",
+      "rounds": [
+        {
+          "country": "Italien",
+          "distanceKm": 1039,
+          "relativePoints": -2161,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Thailand",
+          "distanceKm": 8,
+          "relativePoints": 1534,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Bangladesch",
+          "distanceKm": 208,
+          "relativePoints": 332,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Argentinien",
+          "distanceKm": 293,
+          "relativePoints": 2034,
+          "multiplierActive": true,
+          "myMultiplier": 2,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Türkei",
+          "distanceKm": 0.078,
+          "relativePoints": 2170,
+          "multiplierActive": true,
+          "myMultiplier": 2.5,
+          "oppMultiplier": 1.5
+        }
+      ]
     }
   ]
 }
