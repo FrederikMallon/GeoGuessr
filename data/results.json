@@ -2503,6 +2503,70 @@
           "oppMultiplier": 1.5
         }
       ]
+    },
+    {
+      "id": "muloxgvk-sex4g",
+      "date": "2026-09-28",
+      "mode": "Move",
+      "note": "",
+      "rounds": [
+        {
+          "country": "Österreich",
+          "distanceKm": 102,
+          "relativePoints": -313,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Guatemala",
+          "distanceKm": 105,
+          "relativePoints": 73,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Slowakei",
+          "distanceKm": 0.264,
+          "relativePoints": 114,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Russland",
+          "distanceKm": 238,
+          "relativePoints": 1808,
+          "multiplierActive": true,
+          "myMultiplier": 2,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Vereinigte Staaten",
+          "distanceKm": 47,
+          "relativePoints": 40,
+          "multiplierActive": true,
+          "myMultiplier": 2.5,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Kenia",
+          "distanceKm": 34,
+          "relativePoints": 2304,
+          "multiplierActive": true,
+          "myMultiplier": 3,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Norwegen",
+          "distanceKm": 137,
+          "relativePoints": 2072,
+          "multiplierActive": true,
+          "myMultiplier": 3.5,
+          "oppMultiplier": 1.5
+        }
+      ]
     }
   ]
 }
