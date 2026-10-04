@@ -3223,6 +3223,174 @@
           "oppMultiplier": 2.5
         }
       ]
+    },
+    {
+      "id": "muu9swot-7q6ey",
+      "date": "2026-10-04",
+      "mode": "Move",
+      "note": "",
+      "rounds": [
+        {
+          "country": "Indien",
+          "distanceKm": 332,
+          "relativePoints": -493,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Kolumbien",
+          "distanceKm": 0.001,
+          "relativePoints": 708,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Kanada",
+          "distanceKm": 1361,
+          "relativePoints": -2876,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Jersey",
+          "distanceKm": 216,
+          "relativePoints": 178,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 2
+        },
+        {
+          "country": "Polen",
+          "distanceKm": 51,
+          "relativePoints": -332,
+          "multiplierActive": true,
+          "myMultiplier": 2,
+          "oppMultiplier": 2
+        },
+        {
+          "country": "Bangladesch",
+          "distanceKm": 11,
+          "relativePoints": 1680,
+          "multiplierActive": true,
+          "myMultiplier": 2,
+          "oppMultiplier": 2.5
+        },
+        {
+          "country": "Finnland",
+          "distanceKm": 0.01,
+          "relativePoints": 0,
+          "multiplierActive": true,
+          "myMultiplier": 2.5,
+          "oppMultiplier": 2.5
+        }
+      ]
+    },
+    {
+      "id": "muua042i-91na0",
+      "date": "2026-10-04",
+      "mode": "Move",
+      "note": "",
+      "rounds": [
+        {
+          "country": "Ecuador",
+          "distanceKm": 110,
+          "relativePoints": 2186,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Südafrika",
+          "distanceKm": 867,
+          "relativePoints": -485,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Vereinigtes Königreich",
+          "distanceKm": 10,
+          "relativePoints": 879,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Kenia",
+          "distanceKm": 359,
+          "relativePoints": 7724,
+          "multiplierActive": true,
+          "myMultiplier": 2,
+          "oppMultiplier": 1.5
+        }
+      ]
+    },
+    {
+      "id": "muual0oh-sarh8",
+      "date": "2026-10-04",
+      "mode": "Move",
+      "note": "",
+      "rounds": [
+        {
+          "country": "Kanada",
+          "distanceKm": 103,
+          "relativePoints": 1344,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Brasilien",
+          "distanceKm": 107,
+          "relativePoints": 334,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Brasilien",
+          "distanceKm": 612,
+          "relativePoints": -1537,
+          "multiplierActive": true,
+          "myMultiplier": 2,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Deutschland",
+          "distanceKm": 0.007,
+          "relativePoints": 2,
+          "multiplierActive": true,
+          "myMultiplier": 2,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Kolumbien",
+          "distanceKm": 96,
+          "relativePoints": -255,
+          "multiplierActive": true,
+          "myMultiplier": 2.5,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Bulgarien",
+          "distanceKm": 9.3,
+          "relativePoints": 1730,
+          "multiplierActive": true,
+          "myMultiplier": 2.5,
+          "oppMultiplier": 2
+        },
+        {
+          "country": "Argentinien",
+          "distanceKm": 0.539,
+          "relativePoints": 5514,
+          "multiplierActive": true,
+          "myMultiplier": 3,
+          "oppMultiplier": 2
+        }
+      ]
     }
   ]
 }
