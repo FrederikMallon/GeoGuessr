@@ -3391,6 +3391,38 @@
           "oppMultiplier": 2
         }
       ]
+    },
+    {
+      "id": "muwlz08j-zgznr",
+      "date": "2026-10-06",
+      "mode": "Move",
+      "note": "",
+      "rounds": [
+        {
+          "country": "Vereinigte Staaten",
+          "distanceKm": 1.9,
+          "relativePoints": 4547,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Thailand",
+          "distanceKm": 497,
+          "relativePoints": 284,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Vereinigte Staaten",
+          "distanceKm": 22,
+          "relativePoints": 1318,
+          "multiplierActive": true,
+          "myMultiplier": 2,
+          "oppMultiplier": 1
+        }
+      ]
     }
   ]
 }
