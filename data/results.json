@@ -3423,6 +3423,158 @@
           "oppMultiplier": 1
         }
       ]
+    },
+    {
+      "id": "mv2g2da1-x9735",
+      "date": "2026-10-10",
+      "mode": "Move",
+      "note": "",
+      "rounds": [
+        {
+          "country": "Litauen",
+          "distanceKm": 155,
+          "relativePoints": -489,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Philippinen",
+          "distanceKm": 1.9,
+          "relativePoints": 312,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Mexiko",
+          "distanceKm": 219,
+          "relativePoints": 1677,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Italien",
+          "distanceKm": 37,
+          "relativePoints": -146,
+          "multiplierActive": true,
+          "myMultiplier": 2,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Dänemark",
+          "distanceKm": 123,
+          "relativePoints": -778,
+          "multiplierActive": true,
+          "myMultiplier": 2,
+          "oppMultiplier": 2
+        },
+        {
+          "country": "Norwegen",
+          "distanceKm": 4.8,
+          "relativePoints": 44,
+          "multiplierActive": true,
+          "myMultiplier": 2,
+          "oppMultiplier": 2.5
+        },
+        {
+          "country": "Bangladesch",
+          "distanceKm": 10,
+          "relativePoints": 992,
+          "multiplierActive": true,
+          "myMultiplier": 2.5,
+          "oppMultiplier": 2.5
+        },
+        {
+          "country": "Argentinien",
+          "distanceKm": 103,
+          "relativePoints": -800,
+          "multiplierActive": true,
+          "myMultiplier": 3,
+          "oppMultiplier": 2.5
+        },
+        {
+          "country": "Italien",
+          "distanceKm": 0.686,
+          "relativePoints": 0,
+          "multiplierActive": true,
+          "myMultiplier": 3,
+          "oppMultiplier": 3
+        }
+      ]
+    },
+    {
+      "id": "mv2g9u0q-ncafp",
+      "date": "2026-10-10",
+      "mode": "Move",
+      "note": "",
+      "rounds": [
+        {
+          "country": "Australien",
+          "distanceKm": 1244,
+          "relativePoints": -2817,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Tschechien",
+          "distanceKm": 80,
+          "relativePoints": -48,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Malaysia",
+          "distanceKm": 1491,
+          "relativePoints": -5144,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 2
+        }
+      ]
+    },
+    {
+      "id": "mv2gqrl1-iztz1",
+      "date": "2026-10-10",
+      "mode": "Move",
+      "note": "",
+      "rounds": [
+        {
+          "country": "Vereinigtes Königreich",
+          "distanceKm": 82,
+          "relativePoints": -263,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1
+        },
+        {
+          "country": "Norwegen",
+          "distanceKm": 959,
+          "relativePoints": -1209,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 1.5
+        },
+        {
+          "country": "Kolumbien",
+          "distanceKm": 0.045,
+          "relativePoints": 4,
+          "multiplierActive": true,
+          "myMultiplier": 1,
+          "oppMultiplier": 2
+        },
+        {
+          "country": "Russland",
+          "distanceKm": 3406,
+          "relativePoints": -8678,
+          "multiplierActive": true,
+          "myMultiplier": 1.5,
+          "oppMultiplier": 2
+        }
+      ]
     }
   ]
 }
